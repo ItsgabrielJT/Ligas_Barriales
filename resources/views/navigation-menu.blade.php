@@ -15,35 +15,18 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>                    
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('equipos') }}" :active="request()->routeIs('equipos')">
                         {{ __('Equipos') }}
                     </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('torneos') }}" :active="request()->routeIs('torneos')">
                         {{ __('Torneos') }}
                     </x-nav-link>
-                </div>
-
-
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link href="{{ route('calendarios') }}" :active="request()->routeIs('calendarios')">
-                            {{ __('Calendarios') }}
-                        </x-nav-link>
-                    </div>
-
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link href="{{ route('resultados') }}" :active="request()->routeIs('resultados')">
-                            {{ __('Resultados') }}
-                        </x-nav-link>
-                    </div>
-
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('calendarios') }}" :active="request()->routeIs('calendarios')">
+                        {{ __('Calendarios') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('resultados') }}" :active="request()->routeIs('resultados')">
+                        {{ __('Resultados') }}
+                    </x-nav-link>
                     <x-nav-link href="{{ route('jugadores') }}" :active="request()->routeIs('jugadores')">
                         {{ __('Jugadores') }}
                     </x-nav-link>
