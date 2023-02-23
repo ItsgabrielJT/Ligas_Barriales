@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('torneos', function (Blueprint $table) {
+        Schema::create('estadisticas_jugadors', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('descripcion');
-            $table->string('estado_torneo');            
-            $table->string('fecha');            
-            $table->foreignId('calendario_id')->constrained('calendarios');
+            $table->integer('goles')->unsigned();
+            $table->integer('remates')->unsigned();
+            $table->integer('asistencias')->unsigned();
+            $table->foreignId('torneo_id')->constrained('torneos');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('torneos');
+        Schema::dropIfExists('estadisticas_jugadors');
     }
 };
