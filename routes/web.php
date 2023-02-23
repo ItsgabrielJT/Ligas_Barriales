@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,9 +27,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     
-Route::get('/equipos', function () {
-    return view('equipos');
-})->name('equipos');
+Route::resource('/teams', TeamController::class);
 
 Route::get('/calendarios', function () {
     return view('calendarios');

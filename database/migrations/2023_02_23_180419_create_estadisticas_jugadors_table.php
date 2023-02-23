@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('remates')->unsigned();
             $table->integer('asistencias')->unsigned();
             $table->foreignId('torneo_id')->constrained('torneos');
+            $table->foreignId('sanciones_id')->constrained('sanciones');
             $table->timestamps();
         });
     }
