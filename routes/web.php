@@ -25,4 +25,25 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    
+Route::get('/equipos', function () {
+    return view('equipos');
+})->name('equipos');
+
+Route::get('/calendarios', function () {
+    return view('calendarios');
+})->name('calendarios');
+
+Route::get('/torneos', function () {
+    return view('torneos');
+})->name('torneos');
+
+Route::get('/resultados', function () {
+    return view('resultados');
+})->name('resultados');
+    
+Route::get('/jugadores', function () {
+    return view('jugadores');
+})->name('jugadores');
 });
+
