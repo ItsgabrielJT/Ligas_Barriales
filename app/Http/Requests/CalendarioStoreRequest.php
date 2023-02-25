@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CalendarioRequest extends FormRequest
+class CalendarioStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,9 @@ class CalendarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'fecha_partido'=>'required',
+            'equipo_id_local'=>'required',
+            'equipo_id_visitante'=>'required'
         ];
     }
 }

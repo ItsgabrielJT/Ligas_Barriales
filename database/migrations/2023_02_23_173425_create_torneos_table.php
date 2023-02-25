@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('titulo');
             $table->string('descripcion');
-            $table->string('estado_torneo');            
-            $table->string('fecha');            
+            $table->string('estado_torneo');                    
             $table->foreignId('calendario_id')->constrained('calendarios');
             $table->timestamps();
         });
