@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Sanciones extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'tipo'
+    ];
+    public function estadisticaJugador (){
+        return $this->belongsToMany(EstadisticasJugador::class);
+    }
 }
