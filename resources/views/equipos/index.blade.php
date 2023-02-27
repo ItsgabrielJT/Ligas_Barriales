@@ -5,12 +5,21 @@
 @section('button-add')
     <a href="{{ route('equipo.create') }}"
         class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mb-4">
-        {{ __('Create my equipo') }}
+        {{ __('Crear mi equipo') }}
     </a>
 @endsection
 
 @section('search')
 <div class="max-w-2xl mx-auto">
+
+    @if (session('status'))
+                <div class="relative py-3 pl-4 pr-10 leading-normal text-{{ session('color') }}-700 bg-{{ session('color') }}-100 rounded-lg mb-4"
+                    role="alert">
+                    <p>{{ session('message') }}</p>
+                    
+                </div>
+     @endif
+
     <form class="flex items-center" action="{{ route('equipo.index') }}" method="get">
         @csrf
         @method('GET')
@@ -80,7 +89,7 @@
                                 <td class="py-3 px-6 text-left">
                                     <div class="flex items-center">
 
-                                        <span>{{ $byr->user_id }}</span>
+                                        <span>{{ Auth::user()->name }}</span>
                                     </div>
                                 </td>
                                 

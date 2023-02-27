@@ -26,9 +26,7 @@ class EquipoController extends Controller
     public function create()
     {
         $equipo = new Equipo();
-        $users = User::all();
-       // $plantillas = Plantilla::all();
-        return view('equipos.create', compact('equipo', 'users'));
+        return view('equipos.create', compact('equipo'));
     }
 
     
@@ -47,8 +45,7 @@ class EquipoController extends Controller
    
     public function edit(Equipo $equipo)
     {
-        $users = User::all();
-        return view('equipos.create', compact('equipo', 'users'));        
+        return view('equipos.create', compact('equipo'));        
     }
 
     
