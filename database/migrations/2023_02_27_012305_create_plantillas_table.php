@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('plantillas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('jugador_id')->constrained('users');
+            $table->foreignId('equipo_id')->constrained('equipos');
             $table->timestamps();
         });
     }

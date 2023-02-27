@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\PlantillaController;
+use App\Http\Controllers\TorneoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,4 +34,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::resource('/equipo', EquipoController::class);
+    Route::resource('/plantilla', PlantillaController::class);
+    Route::resource('/torneo', TorneoController::class);
 });
