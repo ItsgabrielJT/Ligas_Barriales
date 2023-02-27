@@ -8,11 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Plantilla extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'user_id',
-    ];
-    public function user (){
-        return $this->belongsToMany(User::class);
-    }
 }

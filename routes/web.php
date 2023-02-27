@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\TeamController;
+use App\Http\Controllers\EquipoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,27 +22,14 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
+])->get('/dashboard', function (){
+    return view('dashboard');
+})->name('dashboard');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-    
-Route::resource('/teams', TeamController::class);
-
-Route::get('/calendarios', function () {
-    return view('calendarios');
-})->name('calendarios');
-
-Route::get('/torneos', function () {
-    return view('torneos');
-})->name('torneos');
-
-Route::get('/resultados', function () {
-    return view('resultados');
-})->name('resultados');
-    
-Route::get('/jugadores', function () {
-    return view('jugadores');
-})->name('jugadores');
+    Route::resource('/equipo', EquipoController::class);
 });
-
