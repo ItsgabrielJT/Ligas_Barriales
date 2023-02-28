@@ -26,11 +26,11 @@ class PlantillaController extends Controller
     }
 
     
-    public function create(User $user)
+    public function create()
     {
         $plantilla = new Plantilla();
         $users = User::all();
-        $equipo = DB::table('equipos')->where('user_id', 1 )->get();
+        $equipo = Equipo::all();
         return view('plantillas.create', compact('plantilla', 'users', 'equipo'));
     }
 
@@ -51,7 +51,8 @@ class PlantillaController extends Controller
     public function edit(Plantilla $plantilla)
     {
         $users = User::all();
-        return view('plantillas.create', compact('plantilla', 'users'));        
+        $equipo = Equipo::all();
+        return view('plantillas.create', compact('plantilla', 'users', 'equipo'));        
     }
 
     

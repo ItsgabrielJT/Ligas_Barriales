@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('trofeo_image')->nullable();
             $table->string('estado_torneo');                    
-            $table->foreignId('calendario_id')->constrained('calendarios');
             $table->timestamps();
         });
     }

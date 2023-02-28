@@ -29,6 +29,7 @@
                 
                 <form class="grid gap-8 grid-cols-1" action="{{ route('calendario.store', ['torneo'=>$torneo]) }}" method="POST">
                     @csrf
+                    <input type="hidden" value="{{ $torneo->id }}" name="torneo_id">
                     <div class="shadow sm:rounded-md sm:overflow-hidden">
                         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
 

@@ -17,7 +17,7 @@ class CalendarioController extends Controller
     {
         $texto = trim($request->get('texto'));
         $calendarios = DB::table('calendarios')
-            ->select('id','fecha_partido', 'local_id', 'visitante_id')
+            ->select('id','fecha_partido', 'local_id', 'visitante_id', 'torneo_id')
             ->where('fecha_partido', 'LIKE', '%'.$texto.'%')
             ->orderBy('fecha_partido', 'asc')
             ->paginate(10);

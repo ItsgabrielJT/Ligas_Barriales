@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TorneoStoreRequest;
 use App\Models\Calendario;
-use App\Models\Equipo;
 use App\Models\Torneo;
 use Exception;
 use Illuminate\Http\Request;
@@ -67,10 +66,6 @@ class TorneoController extends Controller
     }
 
     public function completeSend(TorneoStoreRequest $request, Torneo $torneo, Calendario $calendario) {
-        
-        $data = $request->all();
-        $data['calendario_id'] = $calendario->id;
-        $torneo->fill($data);
 
         try {           
             $result = ['status' => 'success', 'color' => 'green', 'message' => 'Fechas saved successfully'];
@@ -78,7 +73,6 @@ class TorneoController extends Controller
             $result = ['status' => 'success', 'color' => 'red', 'message' => $e->getMessage()];
         }
 
-        $torneo->save();
 
         return redirect()->route('torneo.index')->with($result);
     }

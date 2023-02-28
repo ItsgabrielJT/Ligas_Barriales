@@ -3,7 +3,7 @@
 @section('title', 'Plantilla')
 
 @section('button-add')
-    <a href="{{ route('plantilla.create', ['user' => Auth::user()->id]) }}"
+    <a href="{{ route('plantilla.create') }}"
         class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mb-4">
         {{ __('Agregar a mi plantilla') }}
     </a>

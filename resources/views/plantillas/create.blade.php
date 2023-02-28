@@ -28,12 +28,16 @@
                                 <div class="col-span-3 sm:col-span-2">
                                     <label for="equipo_id" class="block text-sm font-medium text-gray-700">
                                         DT {{ Auth::user()->name }}
-                                    </label>                            
-                                    <div class="mt-1 flex rounded-md shadow-sm">                                                                                        
-                                            <input type="hidden" name="equipo_id" id="equipo_id"
-                                            value="{{ 3 }}"
-                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">                                                                                    
-                                    </div>                                    
+                                    </label>   
+                                    @foreach ($equipo as $eqp)
+                                        @if ($eqp->user_id == Auth::user()->id)
+                                            <div class="mt-1 flex rounded-md shadow-sm">                                                                                        
+                                                <input type="hidden" name="equipo_id" id="equipo_id"
+                                                value="{{ $eqp->id }}"
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">                                                                                    
+                                            </div> 
+                                        @endif
+                                    @endforeach                                   
                                     @error('equipo_id')
                                     <span class=" text-sm text-red-600" role="alert">
                                         <strong>{{ $message }}</strong>
