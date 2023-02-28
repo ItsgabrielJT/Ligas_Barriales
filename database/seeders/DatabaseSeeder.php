@@ -18,5 +18,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        \App\Models\Sancion::create([
+            'tipo' => 'roja'
+        ]);
+
+        \App\Models\Sancion::create([
+            'tipo' => 'amarilla'
+        ]);
+        
     }
 }

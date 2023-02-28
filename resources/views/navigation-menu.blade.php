@@ -24,6 +24,9 @@
                     <x-nav-link href="{{ route('torneo.index') }}" :active="request()->routeIs('torneo.*')">
                         {{ __('Torneos') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('estadistica-equipo.index') }}" :active="request()->routeIs('estadistica-equipo.*')">
+                        {{ __('Estadisticas') }}
+                    </x-nav-link>
                 </div>
             </div>
 
