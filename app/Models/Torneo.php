@@ -13,10 +13,5 @@ class Torneo extends Model
         'titulo',
         'trofeo_image',
         'estado_torneo',
-        'calendario_id',
-    ];
-
-    public function calendario (){
-        return $this->belongsTo(Calendario::class);
-    }
+    ];    
 }

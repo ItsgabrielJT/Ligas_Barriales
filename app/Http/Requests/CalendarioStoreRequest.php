@@ -25,6 +25,7 @@ class CalendarioStoreRequest extends FormRequest
             'fecha_partido' => 'required',
             'local_id' => 'required',
             'visitante_id' => 'required',
+            'torneo_id' => 'required',
         ];
     }
 }

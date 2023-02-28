@@ -162,6 +162,7 @@
 
                     </tbody>
                 </table>
+                {{ $torneos->links() }}
             </div>
         </div>
     </div>

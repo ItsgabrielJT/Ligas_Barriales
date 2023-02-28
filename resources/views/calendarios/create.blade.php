@@ -5,6 +5,7 @@
         </h2>
     </x-slot>
 
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <a href="{{ route('calendario.index') }}"
@@ -81,7 +82,7 @@
                                         Fecha Partido
                                     </label>
                                     <div class="mt-1 flex rounded-md shadow-sm">
-                                        <input type="datetime" name="fecha_partido" id="fecha_partido" value="{{ old('fecha_partido') }}"
+                                        <input type="datetime-local" name="fecha_partido" id="fecha_partido" value="{{ old('fecha_partido') }}"
                                             class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">
                                     </div>
                                     @error('fecha_partido')

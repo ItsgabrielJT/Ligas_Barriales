@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class CalendarioController extends Controller
 {
     
-    public function index(Request $request)
+    public function index(Request $request, Torneo $torneo)
     {
         $texto = trim($request->get('texto'));
         $calendarios = DB::table('calendarios')
@@ -21,7 +21,7 @@ class CalendarioController extends Controller
             ->where('fecha_partido', 'LIKE', '%'.$texto.'%')
             ->orderBy('fecha_partido', 'asc')
             ->paginate(10);
-        return view('calendarios.index', compact('calendarios', 'texto')); 
+        return view('calendarios.index', compact('calendarios', 'texto', 'torneo')); 
     }
 
     
@@ -33,10 +33,9 @@ class CalendarioController extends Controller
     }
 
     
-    public function store(CalendarioStoreRequest $request, Torneo $torneo)
-    {
-        $validatedData = $request->validated();
-        Calendario::create($validatedData);
+    public function store(Request $request, Torneo $torneo)
+    { 
+        (new Calendario($request->input()))->saveOrFail();
         return redirect()->route('calendario.create', ['torneo' => $torneo['id']])->with(['status' => 'Success', 'color' => 'green', 'message' => 'Fecha add successfully']);
     }
 
