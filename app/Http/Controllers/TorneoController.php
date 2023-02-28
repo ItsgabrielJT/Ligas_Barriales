@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TorneoStoreRequest;
+use App\Models\Calendario;
+use App\Models\Equipo;
 use App\Models\Torneo;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TorneoController extends Controller
 {
     public function index(Request $request)
     {
         $texto = trim($request->get('texto'));        
-        $torneos = Torneo::with('torneos')
+        $torneos = DB::table('torneos')
         ->select('id', 'titulo', 'trofeo_image', 'estado_torneo','created_at')
         ->where('titulo', 'LIKE','%'.$texto.'%')
         ->orWhere('estado_torneo', 'LIKE', '%'.$texto.'%')
@@ -29,8 +32,8 @@ class TorneoController extends Controller
     
     public function store(TorneoStoreRequest $request)
     {
-        $Torneo = Torneo::create($request->validated());
-        return redirect()->route('Torneo.add_products', ['Torneo'=>$Torneo->id])
+        $torneo = Torneo::create($request->validated());
+        return redirect()->route('calendario.create', ['torneo'=>$torneo])
             ->with(['status'=>'Success', 'color' => 'green', 'message'=>'Item Added Sucessfully']);
     }
     
@@ -46,9 +49,10 @@ class TorneoController extends Controller
     
     public function update(TorneoStoreRequest $request, Torneo $torneo)
     {
-        $torneo->fill($request->validate());
+        $torneo->fill($request->validated());
         $torneo->save();
-        return redirect()->route('torneo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Torneo Created Sucessfully']);
+        return redirect()->route('calendario.create', ['torneo'=>$torneo])
+            ->with(['status'=>'Success', 'color' => 'green', 'message'=>'Torneo agregado Sucessfully']);
     }
     
     public function destroy(Torneo $torneo)
@@ -62,16 +66,18 @@ class TorneoController extends Controller
         return redirect()->route('torneo.index')->with($result);
     }
 
-    public function completeSend(Request $request, Torneo $torneo) {
+    public function completeSend(TorneoStoreRequest $request, Torneo $torneo, Calendario $calendario) {
         
+        $data = $request->all();
+        $data['calendario_id'] = $calendario->id;
+        $torneo->fill($data);
 
         try {           
-            $result = ['status' => 'success', 'color' => 'green', 'message' => 'Mail sent successfully'];
+            $result = ['status' => 'success', 'color' => 'green', 'message' => 'Fechas saved successfully'];
         } catch (\Exception $e) {
-            $result = ['status' => 'success', 'color' => 'green', 'message' => $e->getMessage()];
+            $result = ['status' => 'success', 'color' => 'red', 'message' => $e->getMessage()];
         }
 
-        $torneo->estatus = 'complete';
         $torneo->save();
 
         return redirect()->route('torneo.index')->with($result);

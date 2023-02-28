@@ -11,6 +11,15 @@
 
 @section('search')
 <div class="max-w-2xl mx-auto">
+
+    @if (session('status'))
+                <div class="relative py-3 pl-4 pr-10 leading-normal text-{{ session('color') }}-700 bg-{{ session('color') }}-100 rounded-lg mb-4"
+                    role="alert">
+                    <p>{{ session('message') }}</p>
+                    
+                </div>
+     @endif
+
     <form class="flex items-center" action="{{ route('torneo.index') }}" method="get">
         @csrf
         @method('GET')
@@ -80,7 +89,7 @@
                             </td>
 
                             <td class="py-3 px-6 text-center">
-                                <span>{{ $trn->buyer->titulo }}</span>
+                                <span>{{ $trn->titulo }}</span>
                             </td>
 
                             <td class="py-3 px-6 text-center">
@@ -96,7 +105,7 @@
                                     <div
                                         class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                         <a
-                                            href={{ route('torneo.add_products', ['torneo'=> $trn->id]) }}>
+                                            href={{ route('calendario.index', ['torneo'=> $trn->id]) }}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                 height="16" fill="currentColor"
                                                 class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -104,7 +113,6 @@
                                                     d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                                 <path
                                                     d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                            </svg>
                                             </svg>
                                         </a>
                                     </div>

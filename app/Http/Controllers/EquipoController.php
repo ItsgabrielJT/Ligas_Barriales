@@ -32,7 +32,8 @@ class EquipoController extends Controller
     
     public function store(EquipoStoreRequest $request)
     {
-        Equipo::create($request->validated());
+        $validate = $request->all();
+        Equipo::create($validate);
         return redirect()->route('equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Equipo Registred Sucessfully']);
     }
 
@@ -51,7 +52,7 @@ class EquipoController extends Controller
     
     public function update(EquipoStoreRequest $request, Equipo $equipo)
     {
-        $equipo->fill($request->validate());
+        $equipo->fill($request->validated());
         $equipo->save();    
         return redirect()->route('equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Equipo Updated Sucessfully']);
     }

@@ -57,7 +57,7 @@ class PlantillaController extends Controller
     
     public function update(PlantillaStoreRequest $request, Plantilla $plantilla)
     {
-        $plantilla->fill($request->validate());
+        $plantilla->fill($request->validated());
         $plantilla->save();    
         return redirect()->route('plantilla.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Jugador Updated Sucessfully']);
     }

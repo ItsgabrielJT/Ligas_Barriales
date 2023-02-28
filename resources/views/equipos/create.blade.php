@@ -20,7 +20,7 @@
                     action="{{ route('equipo.update', ["equipo" => $equipo->id ]) }}" @else
                     action="{{ route('equipo.store') }}" @endif enctype="multipart/form-data" method="POST">
                     @if($equipo->id) {{ method_field("PUT") }} @endif
-
+                    
                     @csrf
                     <div class="shadow sm:rounded-md sm:overflow-hidden">
                         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">

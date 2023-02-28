@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TorneoStoreRequest extends FormRequest
+class CalendarioStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class TorneoStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'titulo'=>'required|max:50',
-            'trofeo_image'=>'image',
-            'estado_torneo'=>'required',
+            'fecha_partido' => 'required',
+            'local_id' => 'required',
+            'visitante_id' => 'required',
         ];
     }
 }
