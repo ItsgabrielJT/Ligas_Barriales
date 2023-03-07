@@ -33,8 +33,7 @@ class TorneoController extends Controller
     {
         $validate = $request->all(); 
         Torneo::create($validate);
-        $torneo = Torneo::all();
-        return redirect()->route('calendario.create', ['torneos'=>$torneo])
+        return redirect()->route('calendario.create')
             ->with(['status'=>'Success', 'color' => 'green', 'message'=>'Item Added Sucessfully']);
     }
     
