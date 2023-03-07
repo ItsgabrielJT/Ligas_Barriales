@@ -31,8 +31,10 @@ class TorneoController extends Controller
     
     public function store(TorneoStoreRequest $request)
     {
-        $torneo = (new Torneo($request->input()))->saveOrFail();
-        return redirect()->route('calendario.create', ['torneo'=>$torneo])
+        $validate = $request->all(); 
+        Torneo::create($validate);
+        $torneo = Torneo::all();
+        return redirect()->route('calendario.create', ['torneos'=>$torneo])
             ->with(['status'=>'Success', 'color' => 'green', 'message'=>'Item Added Sucessfully']);
     }
     

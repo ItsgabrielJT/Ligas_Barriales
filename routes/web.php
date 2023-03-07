@@ -44,3 +44,4 @@ Route::middleware([
     Route::post('/torneo/calendario/{torneo}', [TorneoController::class, 'completeSend'])->name('torneo.complete');
 });
 
+            

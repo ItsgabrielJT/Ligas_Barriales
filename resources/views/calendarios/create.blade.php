@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Torneo') }} {{ $torneo->titulo }}
+            {{ __('Torneo') }}
         </h2>
     </x-slot>
 
@@ -14,7 +14,7 @@
             </a>
         </div>
         
-        
+       
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">      
             
@@ -28,15 +28,35 @@
 
             <div class="overflow-hidden sm:rounded-lg">
                 
-                <form class="grid gap-8 grid-cols-1" action="{{ route('calendario.store', ['torneo'=>$torneo]) }}" method="POST">
+                <form class="grid gap-8 grid-cols-1" action="{{ route('calendario.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" value="{{ $torneo->id }}" name="torneo_id">
                     <div class="shadow sm:rounded-md sm:overflow-hidden">
                         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
 
                             <div class="grid grid-cols-3 gap-4">
+
                                 <div>
-                                    <label for="local_id" class="block text-sm font-medium text-gray-700">
+                                    <label for="torneo_id" class="block text-sm font-medium text-gray-700">
+                                        Torneo
+                                    </label>
+                                    <div class="mt-1 flex rounded-md shadow-sm">
+                                        <select name="torneo_id"
+                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">
+                                            <option value="">Escoge un torneo</option>
+                                            @foreach ($torneos as $tr)
+                                            <option value="{{ $tr->id }}">{{ $tr->titulo }} </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('torneo_id')
+                                    <span class=" text-sm text-red-600" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                   <label for="local_id" class="block text-sm font-medium text-gray-700">
                                         Equipo Local
                                     </label>
                                     <div class="mt-1 flex rounded-md shadow-sm">
@@ -101,19 +121,6 @@
                         </div>
                     </div>
                 </form>
-
-                <div class="w-full">                    
-                    <div class=" text-right">
-                        <form method="POST" action="{{ route('torneo.complete', ['calendario'=> $calendario->id, 'torneo'=> $torneo->id]) }}">
-                            @csrf
-                            <a href="{{ route('torneo.complete', ['calendario'=> $calendario->id, 'torneo'=> $torneo->id]) }}" onclick="event.preventDefault();
-                                            this.closest('form').submit();"
-                                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mb-4">
-                                {{ __('Complete and send') }}
-                            </a>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

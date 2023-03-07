@@ -25,18 +25,18 @@ class CalendarioController extends Controller
     }
 
     
-    public function create(Torneo $torneo)
+    public function create(Torneo $torneos)
     {
         $calendario = new Calendario();
         $equipos = Equipo::all();
-        return view('calendarios.create', compact('calendario', 'equipos', 'torneo'));
+        return view('calendarios.create', compact('calendario', 'equipos', 'torneos'));
     }
 
     
-    public function store(Request $request, Torneo $torneo)
+    public function store(Request $request)
     { 
         (new Calendario($request->input()))->saveOrFail();
-        return redirect()->route('calendario.create', ['torneo' => $torneo['id']])->with(['status' => 'Success', 'color' => 'green', 'message' => 'Fecha add successfully']);
+        return redirect()->route('calendario.create')->with(['status' => 'Success', 'color' => 'green', 'message' => 'Fecha add successfully']);
     }
 
     
