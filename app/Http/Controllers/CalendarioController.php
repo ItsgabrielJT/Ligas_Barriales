@@ -28,9 +28,10 @@ class CalendarioController extends Controller
     public function create()
     {
         $calendario = new Calendario();
+        $calendarios = Calendario::all();
         $equipos = Equipo::all();
         $torneos = Torneo::all();
-        return view('calendarios.create', compact('calendario', 'equipos', 'torneos'));
+        return view('calendarios.create', compact('calendario', 'equipos', 'torneos', 'calendarios'));
     }
 
     
@@ -49,7 +50,9 @@ class CalendarioController extends Controller
    
     public function edit(Calendario $calendario)
     {
-        return view('calendarios.create', compact('calendario'));        
+        $torneos = Torneo::all();
+        $equipos = Equipo::all();
+        return view('calendarios.create', compact('calendario', 'torneos', 'equipos'));        
     }
 
     

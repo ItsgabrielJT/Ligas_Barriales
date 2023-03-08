@@ -66,14 +66,13 @@ class TorneoController extends Controller
         return redirect()->route('torneo.index')->with($result);
     }
 
-    public function completeSend(TorneoStoreRequest $request, Torneo $torneo, Calendario $calendario) {
+    public function completeSend(Request $request) {
 
         try {           
             $result = ['status' => 'success', 'color' => 'green', 'message' => 'Fechas saved successfully'];
         } catch (\Exception $e) {
             $result = ['status' => 'success', 'color' => 'red', 'message' => $e->getMessage()];
         }
-
 
         return redirect()->route('torneo.index')->with($result);
     }
