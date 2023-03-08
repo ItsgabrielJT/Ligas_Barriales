@@ -73,11 +73,13 @@
                                 </tr>
                             @else
                         @foreach ($equipos as $byr)
-                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">                                
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
-                                    <div class="flex items-center">                                                        
-                                        <span
-                                            class="font-medium">{{ str_pad($byr->id, 4, 0, STR_PAD_LEFT) }}</span>
+                                    <div class="flex items-center">
+                                        <div class="mr-2">
+                                            <img class="w-20    " src="{{ asset("$byr->image") }}" />
+                                        </div>
+                                        <span class="font-medium">{{ str_pad($byr->id, 4, 0, STR_PAD_LEFT) }}</span>
                                     </div>
                                 </td>
                                 <td class="py-3 px-6 text-left">

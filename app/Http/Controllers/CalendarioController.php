@@ -16,19 +16,32 @@ class CalendarioController extends Controller
     public function index(Request $request, Torneo $torneo)
     {
         $texto = trim($request->get('texto'));
-        $calendarios = DB::table('calendarios')
+        $calen = DB::table('calendarios')
             ->select('id','fecha_partido', 'local_id', 'visitante_id', 'torneo_id')
             ->where('fecha_partido', 'LIKE', '%'.$texto.'%')
             ->orderBy('fecha_partido', 'asc')
             ->paginate(10);
+        $calenda = Calendario::with('local')
+            ->where('local_id', 'LIKE', '%'.$texto.'%')
+            ->get();
+
+        $calendarios = $calenda->combine(Calendario::with('visitante')
+            ->where('visitante_id', 'LIKE', '%'.$texto.'%')
+            ->get());
+
         return view('calendarios.index', compact('calendarios', 'texto', 'torneo')); 
     }
 
     
     public function create()
     {
+        $calenda = Calendario::with('local')
+            ->get();
+
+        $calendarios = $calenda->combine(Calendario::with('visitante')
+            ->get());
+
         $calendario = new Calendario();
-        $calendarios = Calendario::all();
         $equipos = Equipo::all();
         $torneos = Torneo::all();
         return view('calendarios.create', compact('calendario', 'equipos', 'torneos', 'calendarios'));

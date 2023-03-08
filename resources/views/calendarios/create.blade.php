@@ -69,8 +69,11 @@
                                             class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">
                                             <option value="">Escoge un equipo</option>
                                             @foreach ($equipos as $eqp)
-                                            <option value="{{ $eqp->id }}">{{ $eqp->nombre_equipo }}
-                                                ({{ $eqp->image }}) </option>
+                                            <option value="{{ $eqp->id }}">                                                
+                                                <div class="flex items-center">
+                                                    {{ $eqp->nombre_equipo }}                                                    
+                                                </div>
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -90,8 +93,11 @@
                                             class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">
                                             <option value="">Escoge un equipo</option>
                                             @foreach ($equipos as $eqp)
-                                            <option value="{{ $eqp->id }}">{{ $eqp->nombre_equipo }}
-                                                ({{ $eqp->image }}) </option>
+                                                <option value="{{ $eqp->id }}">                                                
+                                                    <div class="flex items-center">
+                                                        {{ $eqp->nombre_equipo }}                                                    
+                                                    </div>
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -139,7 +145,6 @@
                                         <table class="min-w-max w-full table-auto">
                                             <thead>
                                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                                    <th class="py-3 px-6 text-left">Torneo</th>
                                                     <th class="py-3 px-6 text-left">Local</th>
                                                     <th class="py-3 px-6 text-center">Visitante</th>
                                                     <th class="py-3 px-6 text-center">Fecha</th>
@@ -148,18 +153,13 @@
                                             <tbody class="text-gray-600 text-sm font-light">                                                
                                                 @foreach ($calendarios as $cale)
                                                 <tr class="border-b border-gray-200 hover:bg-gray-100">                            
-                                                    <td class="py-3 px-6 text-left">
-                                                        <div class="flex items-center">
-                                                            <span>{{ $cale->torneo_id }}</span>
-                                                        </div>
+                                                
+                                                    <td class="py-3 px-6 text-center">
+                                                        <span>{{ $cale->local->nombre_equipo }}</span>
                                                     </td>
 
                                                     <td class="py-3 px-6 text-center">
-                                                        <span>{{ $cale->local_id }}</span>
-                                                    </td>
-
-                                                    <td class="py-3 px-6 text-center">
-                                                        <span>{{ $cale->visitante_id }}</span>
+                                                        <span>{{ $cale->visitante->nombre_equipo }}</span>
                                                     </td>
 
                                                     <td class="py-3 px-6 text-center">

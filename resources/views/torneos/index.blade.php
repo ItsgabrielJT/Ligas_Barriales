@@ -60,7 +60,6 @@
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-left">#Id</th>
-                            <th class="py-3 px-6 text-left">Trofeo</th>
                             <th class="py-3 px-6 text-center">Nombre</th>
                             <th class="py-3 px-6 text-center">Estatus</th>
                             <th class="py-3 px-6 text-center">Created el</th>
@@ -77,14 +76,10 @@
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <span
-                                        class="font-medium">{{ str_pad($trn->id, 4,0, STR_PAD_LEFT)  }}</span>
-                                </div>
-                            </td>
-
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">
-                                    <span>{{ $trn->trofeo_image }}</span>
+                                    <div class="mr-2">
+                                        <img class="w-20    " src="{{ asset("$trn->trofeo_image") }}" />
+                                    </div>
+                                    <span class="font-medium">{{ str_pad($trn->id, 4, 0, STR_PAD_LEFT) }}</span>
                                 </div>
                             </td>
 

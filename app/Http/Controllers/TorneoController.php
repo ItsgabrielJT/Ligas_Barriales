@@ -31,8 +31,12 @@ class TorneoController extends Controller
     
     public function store(TorneoStoreRequest $request)
     {
-        $validate = $request->all(); 
-        Torneo::create($validate);
+        $data = $request->all();
+        if($request->has('trofeo_image')) {
+            $img_path = $request->file('trofeo_image')->store('medias');
+            $data['trofeo_image'] = $img_path;
+        }
+        Torneo::create($data);
         return redirect()->route('calendario.create')
             ->with(['status'=>'Success', 'color' => 'green', 'message'=>'Item Added Sucessfully']);
     }
