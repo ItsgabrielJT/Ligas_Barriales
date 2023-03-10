@@ -41,6 +41,7 @@ Route::middleware([
     Route::resource('/torneo', TorneoController::class);
     Route::resource('/calendario', CalendarioController::class);
     Route::resource('/estadistica', EstadisticaEquipoController::class)->names('estadistica-equipo');
+    Route::resource('/estadistica/Jugador', EstadisticaJugadorController::class)->names('estadistica-jugador');
     Route::post('/torneo/calendario/', [TorneoController::class, 'completeSend'])->name('torneo.complete');
     Route::post('/plantilla/jugador/', [PlantillaController::class, 'completeSend'])->name('plantilla.complete');
 });

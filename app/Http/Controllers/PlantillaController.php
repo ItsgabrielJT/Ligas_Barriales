@@ -54,23 +54,7 @@ class PlantillaController extends Controller
         //
     }
 
-   
-    public function edit(Plantilla $plantilla)
-    {
-        $users = User::all();
-        $equipo = Equipo::all();
-        return view('plantillas.create', compact('plantilla', 'users', 'equipo'));        
-    }
-
-    
-    public function update(PlantillaStoreRequest $request, Plantilla $plantilla)
-    {
-        $plantilla->fill($request->validated());
-        $plantilla->save();    
-        return redirect()->route('plantilla.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Jugador Updated Sucessfully']);
-    }
-
-    
+        
     public function destroy(Plantilla $plantilla)
     {
         try {

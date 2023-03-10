@@ -62,16 +62,16 @@ class CalendarioController extends Controller
 
    
     public function edit(Calendario $calendario)
-    {
+    {        
         $torneos = Torneo::all();
         $equipos = Equipo::all();
-        return view('calendarios.create', compact('calendario', 'torneos', 'equipos'));        
+        return view('calendarios.edit', compact('calendario', 'torneos', 'equipos'));        
     }
 
     
     public function update(Request $request, Calendario $calendario)
     {
-        $calendario->fill($request->validate());
+        $calendario->fill($request->all());
         $calendario->save();    
         return redirect()->route('calendario.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Calendario Updated Sucessfully']);
     }

@@ -56,7 +56,7 @@ class TorneoController extends Controller
         $torneo->fill($request->validated());
         $torneo->save();
         return redirect()->route('calendario.create', ['torneo'=>$torneo])
-            ->with(['status'=>'Success', 'color' => 'green', 'message'=>'Torneo agregado Sucessfully']);
+            ->with(['status'=>'Success', 'color' => 'green', 'message'=>'Torneo update Sucessfully']);
     }
     
     public function destroy(Torneo $torneo)

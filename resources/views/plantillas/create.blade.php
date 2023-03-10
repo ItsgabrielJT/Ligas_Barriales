@@ -42,7 +42,7 @@
                                         <div class="mt-1 flex rounded-md shadow-sm">
                                             <input type="hidden" name="equipo_id" id="equipo_id"
                                                 value="{{ $eqp->id }}"
-                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300">
                                         </div>
                                     @endif
                                 @endforeach
@@ -61,7 +61,7 @@
                                 </label>
                                 <div class="mt-1 flex rounded-md shadow-sm">
                                     <select name="jugador_id"
-                                        class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">
+                                        class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300">
                                         <option value="">Escoge uno</option>
                                         @foreach ($users as $buyer)
                                             <option value="{{ $buyer->id }}">{{ $buyer->name }}</option>
@@ -92,7 +92,7 @@
                         <h3 class="font-semibold text-xl text-gray-800 leading-tight px-5 py-5"> Jugadores Agregados
                         </h3>
                         <div
-                            class="min-w-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+                            class="min-w-screen bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
                             <div class="w-full">
                                 <div class="bg-white shadow-md rounded my-6">
                                     <table class="min-w-max w-full table-auto">
@@ -136,7 +136,7 @@
                             onclick="event.preventDefault();
                                             this.closest('form').submit();"
                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mb-4">
-                            {{ __('Aceptar Fechas') }}
+                            {{ __('Aceptar') }}
 
                         </a>
                     </form>

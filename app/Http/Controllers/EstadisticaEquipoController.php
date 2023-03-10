@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Calendario;
 use App\Models\EstadisticaEquipo;
 use App\Models\EstadisticaJugador;
+use App\Models\Sancion;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,19 +16,24 @@ class EstadisticaEquipoController extends Controller
     public function index(Request $request)
     {
         $texto = trim($request->get('texto'));
-        $estadisticas = DB::table('estadistica_equipos')
-            ->select('id', 'total_disparos','asisitencias','faltas','tiros_esquina','pases','tiros_fallidos','calendario_id','created_at')
-            ->where('calendario_id', 'LIKE', '%'.$texto.'%')
-            ->orderBy('calendario_id', 'asc')
-            ->paginate(10);
+        $estadisticas = EstadisticaEquipo::with('calendario')->get();
         return view('estadisticas.index', compact('estadisticas', 'texto')); 
     }
 
     
     public function create()
     {
-        $estadistica = new EstadisticaEquipo();
-        return view('estadisticas.create', compact('estadistica'));
+        $calenda = Calendario::with('local')
+            ->get();
+
+        $calendarios = $calenda->combine(Calendario::with('visitante')
+            ->get());
+
+        $estadisticaEq = new EstadisticaEquipo();
+        $estadisticaJd = new EstadisticaJugador();
+        $users = User::all();
+        $sanciones = Sancion::all();
+        return view('estadisticas.create', compact('estadisticaEq', 'calendarios', 'estadisticaJd', 'users', 'sanciones'));
     }
 
     
@@ -33,7 +41,7 @@ class EstadisticaEquipoController extends Controller
     {
         $validate = $request->all();
         EstadisticaEquipo::create($validate);
-        return redirect()->route('estadistica-equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Equipo Registred Sucessfully']);
+        return redirect()->route('estadistica-equipo.create')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Results Registred Sucessfully']);
     }
 
     

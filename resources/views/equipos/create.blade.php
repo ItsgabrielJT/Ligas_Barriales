@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Nuevo Equipo') }}
+            {{ __('Equipo') }}
         </h2>
     </x-slot>
 
@@ -48,7 +48,7 @@
                                     <div class="mt-1 flex rounded-md shadow-sm">
                                         <input type="text" name="nombre_equipo" id="nombre_equipo"
                                             value="{{ old('nombre_equipo', $equipo->nombre_equipo) }}"
-                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">
+                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300">
                                     </div>
                                     @error('nombre_equipo')
                                         <span class=" text-sm text-red-600" role="alert">
@@ -66,7 +66,7 @@
                                     <div class="mt-1 flex rounded-md shadow-sm">
                                         <input type="text" name="descripcion" id="descripcion"
                                             value="{{ old('descripcion', $equipo->descripcion) }}"
-                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">
+                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300">
                                     </div>
                                     @error('descripcion')
                                         <span class=" text-sm text-red-600" role="alert">

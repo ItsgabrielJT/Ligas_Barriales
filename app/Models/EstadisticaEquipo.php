@@ -11,10 +11,10 @@ class EstadisticaEquipo extends Model
 
     protected $fillable = [
         'total_disparos',
-        'asisitencias',
-        'faltas',
+        'total_pases',
+        'posesion',
         'tiros_esquina',
-        'pases',
+        'pases_fallidos',
         'tiros_fallidos',
         'calendario_id',
     ];
