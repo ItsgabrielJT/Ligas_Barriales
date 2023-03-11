@@ -40,9 +40,12 @@ class CalendarioController extends Controller
     }
 
     
-    public function show(Calendario $calendario)
+    public function show($id)
     {
-        //
+        
+        $calendario = Calendario::all(); 
+        dd($calendario);
+        return view('dashboard', compact('calendario'));
     }
 
    
