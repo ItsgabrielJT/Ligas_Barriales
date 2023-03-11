@@ -63,14 +63,14 @@ Route::get('/google-callback', function () {
     } else {
         $userNew = User::create([
             'name' => $user->name,
-            'email' => $user -> email,
-            'avatar' => $user ->avatar,
-            'external_id' => $user -> id,
+            'email' => $user->email,
+            'avatar' => $user->avatar,
+            'external_id' => $user->id,
             'external_auth' => 'google',
         ]);
         Auth::login($userNew);
     }
 
-    return redirect('dashbord');
+    return redirect('dashboard');
  
 });
