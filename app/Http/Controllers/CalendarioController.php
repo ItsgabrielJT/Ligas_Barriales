@@ -42,9 +42,7 @@ class CalendarioController extends Controller
     
     public function show($id)
     {
-        
-        $calendario = Calendario::all(); 
-        dd($calendario);
+        $calendario = Calendario::all();        
         return view('dashboard', compact('calendario'));
     }
 
@@ -72,5 +70,11 @@ class CalendarioController extends Controller
             $result = ['status'=>'Success', 'color' => 'red','message'=>'Calendario cannot be delete'];
         } 
         return redirect()->route('calendario.index')->with($result);
+    }
+
+    public function dashboardCard()
+    {
+        $calendario = Calendario::all();        
+        return view('dashboard', compact('calendario'));
     }
 }

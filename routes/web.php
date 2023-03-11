@@ -31,9 +31,9 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
-])->get('/dashboard', function (){
-    return view('dashboard');
-})->name('dashboard');
+])->group(function (){
+    Route::get('/dashboard', [CalendarioController::class, 'dashboardCard'])->name('dashboard');
+});
 
 Route::middleware([
     'auth:sanctum',
@@ -49,7 +49,6 @@ Route::middleware([
 });
 
 
-Route::get('/calendario/{id}', 'CalendarioController@show')->name('calendario.show');
  
 Route::get('/login-google', function () {
     return Socialite::driver('google')->redirect();
@@ -74,5 +73,4 @@ Route::get('/google-callback', function () {
     }
 
     return redirect('dashboard');
- 
 });
