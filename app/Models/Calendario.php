@@ -16,11 +16,14 @@ class Calendario extends Model
         'torneo_id',
     ];
 
-    public function equipo (){
+    public function local (){
         return $this->belongsTo(Equipo::class);
     }
 
     public function torneo (){
         return $this->belongsTo(Torneo::class);
+    }
+    public function visitante (){
+        return $this->belongsTo(Equipo::class);
     }
 }

@@ -42,8 +42,12 @@ class CalendarioController extends Controller
     
     public function show($id)
     {
-        $calendario = Calendario::all();        
-        return view('dashboard', compact('calendario'));
+        $calendario = Calendario::all() ;   
+        // $aux= $id->local_id;
+        // // $nom=explode("-", $aux);
+        // // $def=$nom[1];
+
+        return view('dashboard', compact('calendario,def'));
     }
 
    
@@ -74,7 +78,11 @@ class CalendarioController extends Controller
 
     public function dashboardCard()
     {
-        $calendario = Calendario::all();        
+        //con with se obtiene la clave foranea
+
+        $pepe = Calendario::with('local')->get(); 
+        $arroz=$pepe->combine(Calendario::with('torneo')->get());
+        $calendario=$arroz->combine(Calendario::with('visitante')->get());      
         return view('dashboard', compact('calendario'));
     }
 }
