@@ -17,10 +17,16 @@ class EstadisticaEquipo extends Model
         'pases_fallidos',
         'tiros_fallidos',
         'calendario_id',
+        'goles',
+        'equipo_id'
     ];
 
     public function calendario (){
         return $this->belongsTo(Calendario::class);
     }
-    
+
+    public function equipo (){
+        return $this->belongsTo(Equipo::class);
+    }
+
 }
