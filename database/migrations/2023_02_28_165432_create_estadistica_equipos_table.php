@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('tiros_esquina')->unsigned();
             $table->integer('pases_fallidos')->unsigned();
             $table->integer('tiros_fallidos')->unsigned();
+            $table->integer('goles')->unsigned();
+            $table->foreignId('equipo_id')->constrained('equipos');
             $table->foreignId('calendario_id')->constrained('calendarios');
             $table->timestamps();
         });

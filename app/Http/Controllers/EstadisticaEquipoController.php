@@ -23,17 +23,18 @@ class EstadisticaEquipoController extends Controller
     
     public function create()
     {
+      $select = false;
         $calenda = Calendario::with('local')
             ->get();
 
-        $calendarios = $calenda->combine(Calendario::with('visitante')
-            ->get());
+        $calendarios = $calenda->combine(Calendario::with('visitante')->get()
+            );
 
         $estadisticaEq = new EstadisticaEquipo();
         $estadisticaJd = new EstadisticaJugador();
         $users = User::all();
         $sanciones = Sancion::all();
-        return view('estadisticas.create', compact('estadisticaEq', 'calendarios', 'estadisticaJd', 'users', 'sanciones'));
+        return view('estadisticas.create', compact('select','estadisticaEq', 'calendarios', 'estadisticaJd', 'users', 'sanciones'));
     }
 
     
@@ -43,8 +44,22 @@ class EstadisticaEquipoController extends Controller
         EstadisticaEquipo::create($validate);
         return redirect()->route('estadistica-equipo.create')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Results Registred Sucessfully']);
     }
-
     
+    public function select(Calendario $calendario)
+    {
+        $calenda = Calendario::with('local')
+            ->get();
+
+        $calendarios = $calenda->combine(Calendario::with('visitante')
+            ->get());
+        $select = True;
+        $estadisticaEq = new EstadisticaEquipo();
+        $estadisticaJd = new EstadisticaJugador();
+        $users = User::all();
+        $sanciones = Sancion::all();
+       return view('estadisticas.create', compact('select', 'calendario', 'calendarios', 'users', 'sanciones', 'estadisticaEq', 'estadisticaJd'));
+    }
+
     public function show(EstadisticaEquipo $estadistica)
     {
         //

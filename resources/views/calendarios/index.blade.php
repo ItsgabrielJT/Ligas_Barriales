@@ -58,7 +58,7 @@
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">#id</th>
+                            <th class="py-3 px-6 text-left"></th>
                             <th class="py-3 px-6 text-left"> Fecha </th>
                             <th class="py-3 px-6 text-left">Equipo Local</th>
                             <th class="py-3 px-6 text-left">Equipo Visitante</th>
@@ -73,11 +73,20 @@
                                 </tr>
                             @else
                         @foreach ($calendarios as $byr)
+                            @php    
+                                $imageL = $byr->local->image;               
+                                $imageV = $byr->visitante->image;                 
+                            @endphp
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
-                                    <div class="flex items-center">                                                        
-                                        <span
-                                            class="font-medium">{{ str_pad($byr->id, 4, 0, STR_PAD_LEFT) }}</span>
+                                    <div class="flex items-center">
+                                        <div class="mr-2 m-2">
+                                            <img class="w-10" src="{{ asset("$imageL") }}" />
+                                        </div>
+                                        <span class="font-medium"> VS </span>
+                                        <div class="mr-2 m-3">
+                                            <img class="w-10" src="{{ asset("$imageV") }}" />
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="py-3 px-6 text-left">

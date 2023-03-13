@@ -58,14 +58,13 @@
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">#id</th>
+                            <th class="py-3 px-6 text-left"></th>
                             <th class="py-3 px-6 text-left">TD</th>
                             <th class="py-3 px-6 text-left">TP</th>
                             <th class="py-3 px-6 text-left">PS</th>
                             <th class="py-3 px-6 text-left">TE</th>
                             <th class="py-3 px-6 text-left">TF</th>
                             <th class="py-3 px-6 text-left">PF</th>
-                            <th class="py-3 px-6 text-center">Torneo</th>
                             <th class="py-3 px-6 text-center">Fecha</th>
                             <th class="py-3 px-6 text-center"></th>
                         </tr>
@@ -78,13 +77,22 @@
                                 </tr>
                             @else
                         @foreach ($estadisticas as $byr)
+                            @php
+                                $imageL = $byr->calendario->local->image;               
+                                $imageV = $byr->calendario->visitante->image;                 
+                            @endphp
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
-                                    <div class="flex items-center">                                                        
-                                        <span
-                                            class="font-medium">{{ str_pad($byr->id, 4, 0, STR_PAD_LEFT) }}</span>
+                                    <div class="flex items-center">
+                                        <div class="mr-2 m-2">
+                                            <img class="w-10" src="{{ asset("$imageL") }}" />
+                                        </div>
+                                        <span class="font-medium"> VS </span>
+                                        <div class="mr-2 m-3">
+                                            <img class="w-10" src="{{ asset("$imageV") }}" />
+                                        </div>
                                     </div>
-                                </td>
+                                </td>                                
                                 <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
@@ -121,12 +129,7 @@
                                         <span>{{ $byr->pases_fallidos}}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-center">
-                                    <div class="flex items-center">
-
-                                        <span>{{ $byr->calendario_id}}</span>
-                                    </div>
-                                </td>
+                                
                                 
                                 
                                 <td class="py-3 px-6 text-center">
