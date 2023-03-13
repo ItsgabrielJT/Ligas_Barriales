@@ -12,37 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class EstadisticaJugadorController extends Controller
 {
-    public function index(Request $request)
-    {
-        $texto = trim($request->get('texto'));
-        $estadisticas = DB::table('estadistica_equipos')
-            ->select('id', 'total_disparos','asisitencias','faltas','tiros_esquina','pases','tiros_fallidos','calendario_id','created_at')
-            ->where('calendario_id', 'LIKE', '%'.$texto.'%')
-            ->orderBy('calendario_id', 'asc')
-            ->paginate(10);
-        return view('estadisticas.index', compact('estadisticas', 'texto')); 
-    }
-
-    
-    public function create()
-    {
-        $calenda = Calendario::with('local')
-            ->get();
-
-        $calendarios = $calenda->combine(Calendario::with('visitante')
-            ->get());
-
-        $estadisticaEq = new EstadisticaEquipo();
-        $estadisticaJd = new EstadisticaJugador();
-        return view('estadisticas.create', compact('estadisticaEq', 'calendarios', 'estadisticaJd', 'users'));
-    }
-
-    
+        
     public function store(Request $request)
     {
         $validate = $request->all();
         EstadisticaJugador::create($validate);
-        return redirect()->route('estadistica-equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Results Registred Sucessfully']);
+        return redirect()->route('estadistica-equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Results from player Registred Sucessfully']);
     }
 
     
@@ -52,27 +27,27 @@ class EstadisticaJugadorController extends Controller
     }
 
    
-    public function edit(EstadisticaEquipo $estadistica)
+    public function edit(EstadisticaJugador $jugador)
     {
-        return view('estadisticas.create', compact('estadistica'));        
+        return view('estadisticas.create', compact('jugador'));        
     }
 
     
-    public function update(Request $request, EstadisticaEquipo $estadistica)
+    public function update(Request $request, EstadisticaJugador $estadistica)
     {
         $estadistica->fill($request->all());
         $estadistica->save();    
-        return redirect()->route('estadistica-equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Equipo Updated Sucessfully']);
+        return redirect()->route('estadistica-equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Result from player Updated Sucessfully']);
     }
 
     
-    public function destroy(EstadisticaEquipo $Equipo)
+    public function destroy(EstadisticaJugador $jugador)
     {
         try {
-            $Equipo->delete();
-            $result = ['status'=>'Success', 'color' => 'green','message'=>'Equipo Deleted Sucessfully'];
+            $jugador->delete();
+            $result = ['status'=>'Success', 'color' => 'green','message'=>'Result from player Deleted Sucessfully'];
         } catch(Exception $e) {
-            $result = ['status'=>'Success', 'color' => 'red','message'=>'Equipo cannot be delete'];
+            $result = ['status'=>'Success', 'color' => 'red','message'=>'Resultfrom player cannot be delete'];
         } 
         return redirect()->route('estadistica-equipo.index')->with($result);
     }

@@ -13,11 +13,15 @@ use Illuminate\Support\Facades\DB;
 
 class EstadisticaEquipoController extends Controller
 {
+
     public function index(Request $request)
     {
         $texto = trim($request->get('texto'));
         $estadisticas = EstadisticaEquipo::with('calendario')->get();
-        return view('estadisticas.index', compact('estadisticas', 'texto')); 
+        $estadistica = EstadisticaJugador::with('calendario')->get();
+        $estadisticaJ = $estadistica->combine(EstadisticaJugador::with('jugador')->get());
+        $estadisticasJd = $estadisticaJ->combine(EstadisticaJugador::with('sanciones')->get());
+        return view('estadisticas.index', compact('estadisticas', 'texto', 'estadisticasJd')); 
     }
 
     
@@ -41,12 +45,12 @@ class EstadisticaEquipoController extends Controller
     public function store(Request $request)
     {
         $validate = $request->all();
-        EstadisticaEquipo::create($validate);
-        return redirect()->route('estadistica-equipo.create')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Results Registred Sucessfully']);
+        EstadisticaEquipo::create($validate);        
+        return redirect()->route('estadistica-equipo.create');
     }
     
     public function select(Calendario $calendario)
-    {
+    {        
         $calenda = Calendario::with('local')
             ->get();
 
@@ -80,13 +84,13 @@ class EstadisticaEquipoController extends Controller
     }
 
     
-    public function destroy(EstadisticaEquipo $Equipo)
+    public function destroy(EstadisticaEquipo $estadistica)
     {
         try {
-            $Equipo->delete();
-            $result = ['status'=>'Success', 'color' => 'green','message'=>'Equipo Deleted Sucessfully'];
+            $estadistica->delete();
+            $result = ['status'=>'Success', 'color' => 'green','message'=>'Result Deleted Sucessfully'];
         } catch(Exception $e) {
-            $result = ['status'=>'Success', 'color' => 'red','message'=>'Equipo cannot be delete'];
+            $result = ['status'=>'Success', 'color' => 'red','message'=>'Result cannot be delete'];
         } 
         return redirect()->route('estadistica-equipo.index')->with($result);
     }

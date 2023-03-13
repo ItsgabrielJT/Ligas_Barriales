@@ -20,15 +20,15 @@ class EstadisticaJugador extends Model
     ];
 
     public function calendario (){
-        return $this->belongsTo(Calendaro::class);
+        return $this->belongsTo(Calendario::class);
     }
 
-    public function sancion (){
-        return $this->belongsToMany(Sancion::class);
+    public function sanciones (){
+        return $this->belongsTo(Sancion::class);
     }
 
     public function jugador (){
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
 }
