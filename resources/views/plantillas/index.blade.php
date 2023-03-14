@@ -65,6 +65,7 @@
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
                     </thead>
+                    	
 
                     <tbody class="text-gray-600 text-sm font-light">
                         @if(count($plantilla)<=0)
@@ -82,16 +83,15 @@
                                 </td>
                                 <td class="py-3 px-6 text-left">
                                     <div class="flex items-center">
-                                        <span>{{ $byr->user->name }}</span>
+                                        <span>{{ $byr->name }}</span>
                                     </div>
                                 </td>
                                 <td class="py-3 px-6 text-left">
                                     <div class="flex items-center">
 
-                                        <span>{{ $byr->user->email }}</span>
+                                        <span>{{ $byr->email }}</span>
                                     </div>
-                                </td>
-                                
+                                </td>                                                            
                                 <td class="py-3 px-6 text-center">
                                     <span
                                         class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">{{ $byr->created_at }}</span>
@@ -124,6 +124,7 @@
                         @endif
                     </tbody>                                
                 </table>
+                {{ $plantilla->links() }}
             </div>
         </div>
     </div>

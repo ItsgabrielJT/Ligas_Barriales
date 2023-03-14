@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Calendario;
 use App\Models\EstadisticaEquipo;
 use App\Models\EstadisticaJugador;
+use App\Models\Plantilla;
 use App\Models\Sancion;
 use App\Models\User;
 use Exception;
@@ -17,11 +18,18 @@ class EstadisticaEquipoController extends Controller
     public function index(Request $request)
     {
         $texto = trim($request->get('texto'));
-        $estadisticas = EstadisticaEquipo::with('calendario')->get();
-        $estadistica = EstadisticaJugador::with('calendario')->get();
-        $estadisticaJ = $estadistica->combine(EstadisticaJugador::with('jugador')->get());
-        $estadisticasJd = $estadisticaJ->combine(EstadisticaJugador::with('sanciones')->get());
-        return view('estadisticas.index', compact('estadisticas', 'texto', 'estadisticasJd')); 
+        $texto_2 = trim($request->get('texto_2'));
+
+        $estadisticas = EstadisticaEquipo::join("calendarios","calendarios.id", "=", "estadistica_equipos.calendario_id")
+                ->select('*')                         
+                ->paginate(3);
+
+        $estadisticasJd = EstadisticaJugador::join("users","users.id", "=", "estadistica_jugadors.jugador_id")
+                ->select('*')   
+                ->where('users.name', 'LIKE', '%'.$texto_2.'%')
+                ->paginate(3);
+
+        return view('estadisticas.index', compact('estadisticas', 'texto', 'texto_2', 'estadisticasJd')); 
     }
 
     
@@ -36,9 +44,9 @@ class EstadisticaEquipoController extends Controller
 
         $estadisticaEq = new EstadisticaEquipo();
         $estadisticaJd = new EstadisticaJugador();
-        $users = User::all();
         $sanciones = Sancion::all();
-        return view('estadisticas.create', compact('select','estadisticaEq', 'calendarios', 'estadisticaJd', 'users', 'sanciones'));
+        $plantillas = Plantilla::with('user')->get();
+        return view('estadisticas.create', compact('plantillas', 'select','estadisticaEq', 'calendarios', 'estadisticaJd', 'sanciones'));
     }
 
     
@@ -59,9 +67,9 @@ class EstadisticaEquipoController extends Controller
         $select = True;
         $estadisticaEq = new EstadisticaEquipo();
         $estadisticaJd = new EstadisticaJugador();
-        $users = User::all();
         $sanciones = Sancion::all();
-       return view('estadisticas.create', compact('select', 'calendario', 'calendarios', 'users', 'sanciones', 'estadisticaEq', 'estadisticaJd'));
+        $plantillas = Plantilla::with('user')->get();
+       return view('estadisticas.create', compact('plantillas','select', 'calendario', 'calendarios', 'sanciones', 'estadisticaEq', 'estadisticaJd'));
     }
 
     public function show(EstadisticaEquipo $estadistica)

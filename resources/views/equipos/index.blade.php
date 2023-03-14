@@ -140,6 +140,7 @@
                         @endif
                     </tbody>                                
                 </table>
+                {{ $equipos->links() }}
             </div>
         </div>
     </div>

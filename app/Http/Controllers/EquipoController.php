@@ -15,10 +15,10 @@ class EquipoController extends Controller
     {
         $texto = trim($request->get('texto'));
         $equipos = DB::table('equipos')
-            ->select('id', 'nombre_equipo', 'user_id', 'created_at', 'image')
+            ->select('*')
             ->where('nombre_equipo', 'LIKE', '%'.$texto.'%')
-            ->orderBy('nombre_equipo', 'asc')
-            ->paginate(10);
+            ->orderBy('nombre_equipo', 'desc')
+            ->paginate(4);
         return view('equipos.index', compact('equipos', 'texto')); 
     }
 

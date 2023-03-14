@@ -386,6 +386,8 @@
 
                 </div>
 
+                <!-- Vista de Jugadores -->
+
                 <div class="grid gap-8 grid-cols-2 my-5">
 
                     <form class="grid gap-8 grid-cols-1"
@@ -401,8 +403,30 @@
                         <div class="shadow sm:rounded-md sm:overflow-hidden">
                             <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
 
-                                <div class="grid grid-cols-4 gap-4">
+                                <div class="grid grid-cols-3 gap-4">
                                     
+                                    <div>
+                                        <label for="jugador_id" class="block text-sm font-medium text-gray-700">
+                                            Jugador
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <select name="jugador_id"
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300">
+                                                <option value="">Selecciona uno</option>
+                                                @foreach ($plantillas as $buyer)
+                                                    @if ($buyer->equipo_id == $calendario->local_id)
+                                                        <option value="{{ $buyer->jugador_id }}">{{ $buyer->user->name }}</option>                                                    
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('jugador_id')
+                                            <span class=" text-sm text-red-600" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
                                     <div>
                                         <label for="goles" class="block text-sm font-medium text-gray-700">
                                             Goles
@@ -450,27 +474,7 @@
                                             </span>
                                         @enderror
                                     </div>
-
-                                    <div>
-                                        <label for="jugador_id" class="block text-sm font-medium text-gray-700">
-                                            Jugador
-                                        </label>
-                                        <div class="mt-1 flex rounded-md shadow-sm">
-                                            <select name="jugador_id"
-                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300">
-                                                <option value="">Selecciona uno</option>
-                                                @foreach ($users as $buyer)
-                                                    <option value="{{ $buyer->id }}">{{ $buyer->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        @error('jugador_id')
-                                            <span class=" text-sm text-red-600" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
+                                    
                                     <div>
                                         <label for="sanciones_id" class="block text-sm font-medium text-gray-700">
                                             Sanciones
@@ -515,7 +519,29 @@
                     <div class="shadow sm:rounded-md sm:overflow-hidden">
                         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
 
-                            <div class="grid grid-cols-4 gap-4">
+                            <div class="grid grid-cols-3 gap-4">
+
+                                <div>
+                                    <label for="jugador_id" class="block text-sm font-medium text-gray-700">
+                                        Jugador
+                                    </label>
+                                    <div class="mt-1 flex rounded-md shadow-sm">
+                                        <select name="jugador_id"
+                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300">
+                                            <option value="">Selecciona uno</option>
+                                            @foreach ($plantillas as $buyer)
+                                                @if ($buyer->equipo_id == $calendario->visitante_id)
+                                                    <option value="{{ $buyer->jugador_id }}">{{ $buyer->user->name }}</option>                                                    
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('jugador_id')
+                                        <span class=" text-sm text-red-600" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                                 
                                 <div>
                                     <label for="goles" class="block text-sm font-medium text-gray-700">
@@ -564,27 +590,7 @@
                                         </span>
                                     @enderror
                                 </div>
-
-                                <div>
-                                    <label for="jugador_id" class="block text-sm font-medium text-gray-700">
-                                        Jugador
-                                    </label>
-                                    <div class="mt-1 flex rounded-md shadow-sm">
-                                        <select name="jugador_id"
-                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300">
-                                            <option value="">Selecciona uno</option>
-                                            @foreach ($users as $buyer)
-                                                <option value="{{ $buyer->id }}">{{ $buyer->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    @error('jugador_id')
-                                        <span class=" text-sm text-red-600" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
+                                
                                 <div>
                                     <label for="sanciones_id" class="block text-sm font-medium text-gray-700">
                                         Sanciones
@@ -616,25 +622,12 @@
                     </div>
                 </form>
             </div>
-
+            <!-- Fin Vista de Jugadores -->
                 </div>
             @else
                 <span class=" text-sm text-slate-500" role="alert">
                     <strong> No se ha seleccionado un partido </strong>
                 </span>
-            @endif
-
-            <!--  Fin de Vista de equipos -->
-
-
-            <!-- Vista de Jugadores -->
-
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mt-10">
-
-
-            </div>
-
-            <!-- Fin Vista de Jugadores -->
-
+            @endif        
         </div>
 </x-app-layout>

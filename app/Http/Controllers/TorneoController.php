@@ -13,13 +13,12 @@ class TorneoController extends Controller
 {
     public function index(Request $request)
     {
-        $texto = trim($request->get('texto'));        
+        $texto = trim($request->get('texto'));                                
         $torneos = DB::table('torneos')
-        ->select('id', 'titulo', 'trofeo_image', 'estado_torneo','created_at')
-        ->where('titulo', 'LIKE','%'.$texto.'%')
-        ->orWhere('estado_torneo', 'LIKE', '%'.$texto.'%')
-        ->orderBy('id', 'asc')
-            ->paginate(3);
+                    ->select('*')
+                    ->where('titulo', 'LIKE', '%'.$texto.'%')
+                    ->orWhere('estado_torneo', 'LIKE', '%'.$texto.'%')
+                    ->paginate(4);
         return view('torneos.index', compact('torneos', 'texto'));
     }
     

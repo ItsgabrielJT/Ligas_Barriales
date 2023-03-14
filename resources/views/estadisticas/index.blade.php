@@ -50,6 +50,7 @@
 </div>
 @endsection
 
+
 @section('table')
 <div class="overflow-x-auto">
     <div class="bg-white rounded my-1 shadow-md">
@@ -204,10 +205,10 @@
                         clip-rule="evenodd"></path>
                 </svg>
             </div>
-            <input type="text" name="texto"
+            <input type="text" name="texto_2"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search" required
-                value="{{ $texto }}">
+                value="{{ $texto_2 }}">
                 
         </div>
         <button type="submit"
