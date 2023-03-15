@@ -15,10 +15,10 @@ class EquipoController extends Controller
     {
         $texto = trim($request->get('texto'));
         $equipos = DB::table('equipos')
-            ->select('id', 'nombre_equipo', 'user_id', 'created_at')
+            ->select('*')
             ->where('nombre_equipo', 'LIKE', '%'.$texto.'%')
-            ->orderBy('nombre_equipo', 'asc')
-            ->paginate(10);
+            ->orderBy('nombre_equipo', 'desc')
+            ->paginate(4);
         return view('equipos.index', compact('equipos', 'texto')); 
     }
 
@@ -32,8 +32,12 @@ class EquipoController extends Controller
     
     public function store(EquipoStoreRequest $request)
     {
-        $validate = $request->all();
-        Equipo::create($validate);
+        $data = $request->all();
+        if($request->has('image')) {
+            $img_path = $request->file('image')->store('medias');
+            $data['image'] = $img_path;
+        }
+        Equipo::create($data);
         return redirect()->route('equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Equipo Registred Sucessfully']);
     }
 

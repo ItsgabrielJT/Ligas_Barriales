@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Sancion::create([
             'tipo' => 'roja'
+         ]);
+    
+        \App\Models\Sancion::create([
+            'tipo' => 'ninguna'
         ]);
 
         \App\Models\Sancion::create([

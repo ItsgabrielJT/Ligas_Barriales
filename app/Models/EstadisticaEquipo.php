@@ -11,16 +11,22 @@ class EstadisticaEquipo extends Model
 
     protected $fillable = [
         'total_disparos',
-        'asisitencias',
-        'faltas',
+        'total_pases',
+        'posesion',
         'tiros_esquina',
-        'pases',
+        'pases_fallidos',
         'tiros_fallidos',
         'calendario_id',
+        'goles',
+        'equipo_id'
     ];
 
     public function calendario (){
         return $this->belongsTo(Calendario::class);
     }
-    
+
+    public function equipo (){
+        return $this->belongsTo(Equipo::class);
+    }
+
 }

@@ -32,7 +32,7 @@
                                     <div class="mt-1 flex rounded-md shadow-sm">
                                         <input type="text" name="titulo" id="titulo"
                                             value="{{ old('titulo', $torneo->titulo) }}"
-                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">
+                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300">
                                     </div>
                                     @error('titulo')
                                         <span class=" text-sm text-red-600" role="alert">
@@ -50,7 +50,7 @@
                                     <div class="mt-1 flex rounded-md shadow-sm">
                                         <input type="text" name="estado_torneo" id="estado_torneo"
                                             value="{{ old('estado_torneo', $torneo->estado_torneo) }}"
-                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300">
+                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300">
                                     </div>
                                     @error('estado_torneo')
                                         <span class=" text-sm text-red-600" role="alert">
@@ -102,7 +102,7 @@
                         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                             <button type="submit"
                                 class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Agregar Torneo
+                                Aceptar
                             </button>
                         </div>
                     </div>

@@ -24,7 +24,8 @@ class EquipoStoreRequest extends FormRequest
         return [
             'nombre_equipo'=>'required|max:50',
             'descripcion'=>'required',
-            'user_id'=>'required',
+            'user_id'=>'required',          
+            'image'=>'image'
         ];
     }
 }

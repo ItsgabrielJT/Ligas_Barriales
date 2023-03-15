@@ -5,7 +5,7 @@
 @section('button-add')
     <a href="{{ route('torneo.create') }}"
         class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mb-4">
-        {{ __('Add New') }}
+        {{ __('Agregar Torneo') }}
     </a>
 @endsection
 
@@ -53,14 +53,13 @@
 @section('table')
 <div class="overflow-x-auto">
     <div
-        class="min-w-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+        class="min-w-screen bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
         <div class="w-full">
             <div class="bg-white shadow-md rounded my-6">
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-left">#Id</th>
-                            <th class="py-3 px-6 text-left">Trofeo</th>
                             <th class="py-3 px-6 text-center">Nombre</th>
                             <th class="py-3 px-6 text-center">Estatus</th>
                             <th class="py-3 px-6 text-center">Created el</th>
@@ -77,14 +76,10 @@
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <span
-                                        class="font-medium">{{ str_pad($trn->id, 4,0, STR_PAD_LEFT)  }}</span>
-                                </div>
-                            </td>
-
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">
-                                    <span>{{ $trn->trofeo_image }}</span>
+                                    <div class="mr-2">
+                                        <img class="w-20    " src="{{ asset("$trn->trofeo_image") }}" />
+                                    </div>
+                                    <span class="font-medium">{{ str_pad($trn->id, 4, 0, STR_PAD_LEFT) }}</span>
                                 </div>
                             </td>
 
@@ -105,15 +100,8 @@
                                     <div
                                         class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                         <a
-                                            href={{ route('calendario.index', ['torneo'=> $trn->id]) }}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                height="16" fill="currentColor"
-                                                class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                                <path
-                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                            </svg>
+                                            href={{ route('calendario.index', ['torneo'=> $trn->id]) }}>                                            
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M17 22v-3h-3v-2h3v-3h2v3h3v2h-3v3ZM5 20q-.825 0-1.413-.587Q3 18.825 3 18V6q0-.825.587-1.412Q4.175 4 5 4h1V2h2v2h6V2h2v2h1q.825 0 1.413.588Q19 5.175 19 6v6.1q-.5-.075-1-.075t-1 .075V10H5v8h7q0 .5.075 1t.275 1ZM5 8h12V6H5Zm0 0V6v2Z"/></svg>
                                         </a>
                                     </div>
 

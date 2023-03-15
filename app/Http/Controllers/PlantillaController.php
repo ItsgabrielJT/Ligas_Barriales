@@ -16,29 +16,32 @@ class PlantillaController extends Controller
     
     public function index(Request $request)
     {
-        $texto = trim($request->get('texto'));
+        $texto = trim($request->get('texto'));                                        
         $plantilla = DB::table('plantillas')
-            ->select('id', 'jugador_id', 'equipo_id','created_at')
-            ->where('jugador_id', 'LIKE', '%'.$texto.'%')
-            ->orderBy('jugador_id', 'asc')
-            ->paginate(10);
+        ->join('users', 'plantillas.jugador_id', '=', 'users.id')
+        ->select('plantillas.*', 'users.name', 'users.email')
+        ->paginate(6);
+            
         return view('plantillas.index', compact('plantilla', 'texto')); 
     }
 
     
     public function create()
     {
+        $plantillas = Plantilla::with('user')
+            ->get();
+
         $plantilla = new Plantilla();
         $users = User::all();
         $equipo = Equipo::all();
-        return view('plantillas.create', compact('plantilla', 'users', 'equipo'));
+        return view('plantillas.create', compact('plantilla', 'plantillas','users', 'equipo'));
     }
 
     
     public function store(PlantillaStoreRequest $request)
     {
         Plantilla::create($request->validated());
-        return redirect()->route('plantilla.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Jugador Registred Sucessfully']);
+        return redirect()->route('plantilla.create')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Jugador Registred Sucessfully']);
     }
 
     
@@ -47,23 +50,7 @@ class PlantillaController extends Controller
         //
     }
 
-   
-    public function edit(Plantilla $plantilla)
-    {
-        $users = User::all();
-        $equipo = Equipo::all();
-        return view('plantillas.create', compact('plantilla', 'users', 'equipo'));        
-    }
-
-    
-    public function update(PlantillaStoreRequest $request, Plantilla $plantilla)
-    {
-        $plantilla->fill($request->validated());
-        $plantilla->save();    
-        return redirect()->route('plantilla.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Jugador Updated Sucessfully']);
-    }
-
-    
+        
     public function destroy(Plantilla $plantilla)
     {
         try {
@@ -75,9 +62,14 @@ class PlantillaController extends Controller
         return redirect()->route('plantilla.index')->with($result);
     }
 
-    public function complete(Request $request) {
-        
+    public function completeSend(Request $request) {
 
-        return redirect()->route('plantilla.index');
+        try {           
+            $result = ['status' => 'success', 'color' => 'green', 'message' => 'Players add successfully'];
+        } catch (\Exception $e) {
+            $result = ['status' => 'success', 'color' => 'red', 'message' => $e->getMessage()];
+        }
+
+        return redirect()->route('plantilla.index')->with($result);
     }
 }

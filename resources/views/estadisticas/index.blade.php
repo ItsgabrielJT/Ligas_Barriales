@@ -50,83 +50,92 @@
 </div>
 @endsection
 
+
 @section('table')
 <div class="overflow-x-auto">
-    <div class=" bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+    <div class="bg-white rounded my-1 shadow-md">
+        <h3 class="font-semibold text-xl text-gray-800 leading-tight px-5 py-5"> Estadisticas de partidos</h3>
+    </div>
+    <div class=" bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
         <div class="w-full lg:w-5/6">
             <div class="bg-white shadow-md rounded my-6">
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-center">#id</th>
-                            <th class="py-3 px-6 text-center">TD</th>
-                            <th class="py-3 px-6 text-center">AS</th>
-                            <th class="py-3 px-6 text-center">FT</th>
-                            <th class="py-3 px-6 text-center">TE</th>
-                            <th class="py-3 px-6 text-center">TF</th>
-                            <th class="py-3 px-6 text-center">PS</th>
-                            <th class="py-3 px-6 text-center">Torneo</th>
+                            <th class="py-3 px-6 text-left"></th>
+                            <th class="py-3 px-6 text-left">TD</th>
+                            <th class="py-3 px-6 text-left">TP</th>
+                            <th class="py-3 px-6 text-left">PS</th>
+                            <th class="py-3 px-6 text-left">TE</th>
+                            <th class="py-3 px-6 text-left">TF</th>
+                            <th class="py-3 px-6 text-left">PF</th>
                             <th class="py-3 px-6 text-center">Fecha</th>
                             <th class="py-3 px-6 text-center"></th>
                         </tr>
                     </thead>
+
+
 
                     <tbody class="text-gray-600 text-sm font-light">
                         @if(count($estadisticas)<=0)
                                 <tr>
                                     <td colspan="5" class="py-3 px-6 text-left whitespace-nowrap font-medium"> No hay Resultados </td>
                                 </tr>
-                            @else
+                        @else
                         @foreach ($estadisticas as $byr)
+                            @php
+                                $imageL = $byr->calendario->local->image;               
+                                $imageV = $byr->calendario->visitante->image;                 
+                            @endphp
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
-                                    <div class="flex items-center">                                                        
-                                        <span
-                                            class="font-medium">{{ str_pad($byr->id, 4, 0, STR_PAD_LEFT) }}</span>
+                                    <div class="flex items-center">
+                                        <div class="mr-2 m-2">
+                                            <img class="w-10" src="{{ asset("$imageL") }}" />
+                                        </div>
+                                        <span class="font-medium"> VS </span>
+                                        <div class="mr-2 m-3">
+                                            <img class="w-10" src="{{ asset("$imageV") }}" />
+                                        </div>
                                     </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
+                                </td>                                
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
                                         <span>{{ $byr->total_disparos}}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-left">
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
-                                        <span>{{ $byr->asisitencias}}</span>
+                                        <span>{{ $byr->total_pases}}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-left">
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
-                                        <span>{{ $byr->faltas}}</span>
+                                        <span>{{ $byr->posesion}}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-left">
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
                                         <span>{{ $byr->tiros_esquina}}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-left">
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
                                         <span>{{ $byr->tiros_fallidos}}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-left">
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
-                                        <span>{{ $byr->pases}}</span>
+                                        <span>{{ $byr->pases_fallidos}}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-left">
-                                    <div class="flex items-center">
-
-                                        <span>{{ $byr->calendario_id}}</span>
-                                    </div>
-                                </td>
+                                
                                 
                                 
                                 <td class="py-3 px-6 text-center">
@@ -174,6 +183,7 @@
                         @endif
                     </tbody>                                
                 </table>
+                {{ $estadisticas->links() }}
             </div>
         </div>
     </div>
@@ -182,24 +192,9 @@
 
 <!-- Seccion de JUgadores -->
 
-@section('button-add-2')
-    <a href="{{ route('estadistica-equipo.create') }}"
-        class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mb-4">
-        {{ __('Registrar Resultados') }}
-    </a>
-@endsection
-
 @section('search-2')
 <div class="max-w-2xl mx-auto">
-
-    @if (session('status'))
-                <div class="relative py-3 pl-4 pr-10 leading-normal text-{{ session('color') }}-700 bg-{{ session('color') }}-100 rounded-lg mb-4"
-                    role="alert">
-                    <p>{{ session('message') }}</p>
-                    
-                </div>
-     @endif
-
+   
     <form class="flex items-center" action="{{ route('estadistica-equipo.index') }}" method="get">
         @csrf
         @method('GET')
@@ -213,10 +208,10 @@
                         clip-rule="evenodd"></path>
                 </svg>
             </div>
-            <input type="text" name="texto"
+            <input type="text" name="texto_2"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search" required
-                value="{{ $texto }}">
+                value="{{ $texto_2 }}">
                 
         </div>
         <button type="submit"
@@ -232,79 +227,79 @@
 
 @section('table-2')
 <div class="overflow-x-auto">
-    <div class=" bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+    <div class="bg-white rounded my-1 shadow-md">
+        <h3 class="font-semibold text-xl text-gray-800 leading-tight px-5 py-5"> Estadisticas de Jugadores </h3>
+    </div>
+    <div class=" bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
         <div class="w-full lg:w-5/6">
             <div class="bg-white shadow-md rounded my-6">
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-center">#id</th>
-                            <th class="py-3 px-6 text-center">G</th>
-                            <th class="py-3 px-6 text-center">R</th>
-                            <th class="py-3 px-6 text-center">AS</th>
-                            <th class="py-3 px-6 text-center">Partido</th>
-                            <th class="py-3 px-6 text-center">Tarjetas</th>
+                            <th class="py-3 px-6 text-left"></th>
+                            <th class="py-3 px-6 text-left">Jugador</th>
+                            <th class="py-3 px-6 text-left">G</th>
+                            <th class="py-3 px-6 text-left">RM</th>
+                            <th class="py-3 px-6 text-left">AS</th>
+                            <th class="py-3 px-6 text-left">FT</th>
+                            <th class="py-3 px-6 text-center">Fecha</th>
                             <th class="py-3 px-6 text-center"></th>
                         </tr>
                     </thead>
 
                     <tbody class="text-gray-600 text-sm font-light">
-                        @if(count($estadisticas)<=0)
+                        @if(count($estadisticasJd)<=0)
                                 <tr>
                                     <td colspan="5" class="py-3 px-6 text-left whitespace-nowrap font-medium"> No hay Resultados </td>
                                 </tr>
-                            @else
-                        @foreach ($estadisticas as $byr)
+                        @else
+                        @foreach ($estadisticasJd as $byr)
+                            @php
+                                $imageL = $byr->calendario->local->image;               
+                                $imageV = $byr->calendario->visitante->image;                 
+                            @endphp
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
-                                    <div class="flex items-center">                                                        
-                                        <span
-                                            class="font-medium">{{ str_pad($byr->id, 4, 0, STR_PAD_LEFT) }}</span>
+                                    <div class="flex items-center">
+                                        <div class="mr-2 m-2">
+                                            <img class="w-10" src="{{ asset("$imageL") }}" />
+                                        </div>
+                                        <span class="font-medium"> VS </span>
+                                        <div class="mr-2 m-3">
+                                            <img class="w-10" src="{{ asset("$imageV") }}" />
+                                        </div>
                                     </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
+                                </td>   
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
-                                        <span>{{ $byr->total_disparos}}</span>
+                                        <span>{{ $byr->jugador->name}}</span>
                                     </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
+                                </td>                             
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
-                                        <span>{{ $byr->asisitencias}}</span>
+                                        <span>{{ $byr->goles}}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-left">
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
-                                        <span>{{ $byr->faltas}}</span>
+                                        <span>{{ $byr->remates}}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-6 text-left">
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
-                                        <span>{{ $byr->tiros_esquina}}</span>
+                                        <span>{{ $byr->asistencias}}</span>
                                     </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
+                                </td>                                
+                                <td class="py-3 px-6 text-center">
                                     <div class="flex items-center">
 
-                                        <span>{{ $byr->tiros_fallidos}}</span>
+                                        <span>{{ $byr->sanciones->tipo}}</span>
                                     </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    <div class="flex items-center">
-
-                                        <span>{{ $byr->pases}}</span>
-                                    </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    <div class="flex items-center">
-
-                                        <span>{{ $byr->calendario_id}}</span>
-                                    </div>
-                                </td>
-                                
+                                </td>                                
                                 
                                 <td class="py-3 px-6 text-center">
                                     <span
@@ -316,7 +311,7 @@
                                         <div
                                             class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                             <a
-                                                href="{{ route('estadistica-equipo.edit', ['estadistica' => $byr->id]) }}">
+                                                href="{{ route('estadistica-jugador.edit', ['jugador' => $byr->id]) }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -326,12 +321,12 @@
                                             </a>
                                         </div>
                                         <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                            <form method="POST" action="{{ route('estadistica-equipo.destroy', ['estadistica' => $byr->id]) }}"
+                                            <form method="POST" action="{{ route('estadistica-jugador.destroy', ['jugador' => $byr->id]) }}"
                                                 class="inline">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
 
-                                                <a href="{{ route('estadistica-equipo.destroy', ['estadistica' => $byr->id]) }}"
+                                                <a href="{{ route('estadistica-jugador.destroy', ['jugador' => $byr->id]) }}"
                                                     onclick="event.preventDefault();
                                                             this.closest('form').submit();">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -351,6 +346,7 @@
                         @endif
                     </tbody>                                
                 </table>
+                {{ $estadisticasJd->links() }}
             </div>
         </div>
     </div>

@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('estadistica_equipos', function (Blueprint $table) {
             $table->id();
             $table->integer('total_disparos')->unsigned();
-            $table->integer('asisitencias')->unsigned();
-            $table->integer('faltas')->unsigned();
+            $table->integer('total_pases')->unsigned();
+            $table->integer('posesion')->unsigned();
             $table->integer('tiros_esquina')->unsigned();
-            $table->integer('pases')->unsigned();
+            $table->integer('pases_fallidos')->unsigned();
             $table->integer('tiros_fallidos')->unsigned();
+            $table->integer('goles')->unsigned();
+            $table->foreignId('equipo_id')->constrained('equipos');
             $table->foreignId('calendario_id')->constrained('calendarios');
             $table->timestamps();
         });

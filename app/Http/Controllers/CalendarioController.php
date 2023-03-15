@@ -16,27 +16,36 @@ class CalendarioController extends Controller
     public function index(Request $request, Torneo $torneo)
     {
         $texto = trim($request->get('texto'));
-        $calendarios = DB::table('calendarios')
-            ->select('id','fecha_partido', 'local_id', 'visitante_id', 'torneo_id')
-            ->where('fecha_partido', 'LIKE', '%'.$texto.'%')
-            ->orderBy('fecha_partido', 'asc')
-            ->paginate(10);
+
+        $calendarios = Calendario::join("equipos","equipos.id", "=", "calendarios.local_id")
+                ->select('calendarios.*')   
+                ->where('equipos.nombre_equipo', 'LIKE', '%'.$texto.'%')
+                ->orWhere('calendarios.fecha_partido', 'LIKE', '%'.$texto.'%')             
+                ->paginate(4);
+
         return view('calendarios.index', compact('calendarios', 'texto', 'torneo')); 
     }
 
     
-    public function create(Torneo $torneo)
+    public function create()
     {
+        $calenda = Calendario::with('local')
+            ->get();
+
+        $calendarios = $calenda->combine(Calendario::with('visitante')
+            ->get());
+
         $calendario = new Calendario();
         $equipos = Equipo::all();
-        return view('calendarios.create', compact('calendario', 'equipos', 'torneo'));
+        $torneos = Torneo::all();
+        return view('calendarios.create', compact('calendario', 'equipos', 'torneos', 'calendarios'));
     }
 
     
-    public function store(Request $request, Torneo $torneo)
+    public function store(Request $request)
     { 
         (new Calendario($request->input()))->saveOrFail();
-        return redirect()->route('calendario.create', ['torneo' => $torneo['id']])->with(['status' => 'Success', 'color' => 'green', 'message' => 'Fecha add successfully']);
+        return redirect()->route('calendario.create')->with(['status' => 'Success', 'color' => 'green', 'message' => 'Fecha add successfully']);
     }
 
     
@@ -52,14 +61,16 @@ class CalendarioController extends Controller
 
    
     public function edit(Calendario $calendario)
-    {
-        return view('calendarios.create', compact('calendario'));        
+    {        
+        $torneos = Torneo::all();
+        $equipos = Equipo::all();
+        return view('calendarios.edit', compact('calendario', 'torneos', 'equipos'));        
     }
 
     
     public function update(Request $request, Calendario $calendario)
     {
-        $calendario->fill($request->validate());
+        $calendario->fill($request->all());
         $calendario->save();    
         return redirect()->route('calendario.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Calendario Updated Sucessfully']);
     }

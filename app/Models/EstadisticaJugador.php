@@ -14,14 +14,21 @@ class EstadisticaJugador extends Model
         'goles',
         'remates',
         'asistencias',
-        'torneo_id',
-        'sanciones_id'
+        'calendario_id',
+        'sanciones_id',
+        'jugador_id'
     ];
 
-    public function torneo (){
-        return $this->belongsTo(Torneo::class);
+    public function calendario (){
+        return $this->belongsTo(Calendario::class);
     }
-    public function sancion (){
-        return $this->belongsToMany(Sancion::class);
+
+    public function sanciones (){
+        return $this->belongsTo(Sancion::class);
     }
+
+    public function jugador (){
+        return $this->belongsTo(User::class);
+    }
+
 }

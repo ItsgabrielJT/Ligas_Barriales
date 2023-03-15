@@ -20,6 +20,10 @@ class Calendario extends Model
         return $this->belongsTo(Equipo::class);
     }
 
+    public function visitante (){
+        return $this->belongsTo(Equipo::class);
+    }
+  
     public function torneo (){
         return $this->belongsTo(Torneo::class);
     }

@@ -20,6 +20,7 @@
                 </div>
      @endif
 
+
     <form class="flex items-center" action="{{ route('calendario.index') }}" method="get">
         @csrf
         @method('GET')
@@ -52,16 +53,16 @@
 
 @section('table')
 <div class="overflow-x-auto">
-    <div class=" bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+    <div class=" bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
         <div class="w-full lg:w-5/6">
             <div class="bg-white shadow-md rounded my-6">
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">#id</th>
+                            <th class="py-3 px-6 text-left"></th>
                             <th class="py-3 px-6 text-left"> Fecha </th>
-                            <th class="py-3 px-6 text-center">Equipo Local</th>
-                            <th class="py-3 px-6 text-center">Equipo Visitante</th>
+                            <th class="py-3 px-6 text-left">Equipo Local</th>
+                            <th class="py-3 px-6 text-left">Equipo Visitante</th>
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
                     </thead>
@@ -73,11 +74,20 @@
                                 </tr>
                             @else
                         @foreach ($calendarios as $byr)
+                            @php    
+                                $imageL = $byr->local->image;               
+                                $imageV = $byr->visitante->image;                 
+                            @endphp
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
-                                    <div class="flex items-center">                                                        
-                                        <span
-                                            class="font-medium">{{ str_pad($byr->id, 4, 0, STR_PAD_LEFT) }}</span>
+                                    <div class="flex items-center">
+                                        <div class="mr-2 m-2">
+                                            <img class="w-10" src="{{ asset("$imageL") }}" />
+                                        </div>
+                                        <span class="font-medium"> VS </span>
+                                        <div class="mr-2 m-3">
+                                            <img class="w-10" src="{{ asset("$imageV") }}" />
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="py-3 px-6 text-left">
@@ -87,12 +97,12 @@
                                 </td>
                                 <td class="py-3 px-6 text-left">
                                     <div class="flex items-center">
-                                        <span>{{ $byr->local_id }}</span>
+                                        <span>{{ $byr->local->nombre_equipo }}</span>
                                     </div>
                                 </td>
                                 <td class="py-3 px-6 text-left">
                                     <div class="flex items-center">
-                                        <span>{{ $byr->visitante_id }}</span>
+                                        <span>{{ $byr->visitante->nombre_equipo }}</span>
                                     </div>
                                 </td>
                                                                 
@@ -137,6 +147,7 @@
                         @endif
                     </tbody>                                
                 </table>
+                {{ $calendarios->links() }}
             </div>
         </div>
     </div>
