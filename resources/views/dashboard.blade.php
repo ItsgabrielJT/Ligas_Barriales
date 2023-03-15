@@ -9,6 +9,7 @@
             <h1 class="text-black-500 text-2xl font-bold text-black-600  ">PARTIDOS PROGRAMADOS</h1>
         </div>
 
+
         @foreach ($calendario as $calen)
             <div
                 class=" transition ease-in-out delay-200  hover:scale-110  duration-300 flex items-center justify-center py-10">
@@ -66,7 +67,7 @@
 
     </div>
 
-    //script para un scroll del boton que contiene un png que hace la accion de bajar la pagina
+    {{-- //script para un scroll del boton que contiene un png que hace la accion de bajar la pagina --}}
     <script>
         var scrollToBottomButton = document.getElementById("fin");
 
