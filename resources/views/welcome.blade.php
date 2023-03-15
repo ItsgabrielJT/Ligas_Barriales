@@ -10,6 +10,8 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
 
 
     <!-- Styles -->
@@ -843,7 +845,7 @@
             margin-left: 20%
         }
 
-      
+
 
         .bg-white-100 {
             background-color: #fff
@@ -856,99 +858,158 @@
         .back-center {
             background-size: cover;
         }
-        .duration-75	{
+
+        .duration-75 {
             transition-duration: 75ms;
         }
+
         .ease-in {
             transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
         }
-       
-        
-        .bg-cian{
+
+
+        .bg-cian {
             background-color: #4BA7AB
         }
-        .bg-cian1{
+
+        .bg-cian1 {
             background-color: #35597A
         }
 
-        .p-10{
+        .p-10 {
             padding: 5%
         }
-        .p-11{
+
+        .p-11 {
             padding: 1em;
         }
 
-        .m-20{
+        .m-20 {
             margin-right: 30%;
             margin-left: 30%
         }
-
     </style>
 </head>
 
 <body class="antialiased bg-dots-darker">
-
-
-
-
-
-            <div class="transition-all shadow sm:rounded-lg back back-center  shadow-2xl" style="background-image: url(images/repe3.png)">
-                <div class=" p-6  bg-center">
-                    <div class="flex justify-center">
-                        <img src="{{ asset('images/icon.png') }}" style="width: 80px; height: 80px;">
-                    </div>
-
-                </div>
-
-
-
+    <div class="transition-all shadow sm:rounded-lg back back-center  shadow-2xl"
+        style="background-image: url(images/repe3.png)">
+        <div class=" p-6  bg-center">
+            <div class="flex justify-center">
+                <img src="{{ asset('images/icon.png') }}" style="width: 80px; height: 80px;">
             </div>
-<div class="p-10 ">
-       <div class="p-11 bg-cian1   rounded-lg shadow-2xl m-20 ">
-            <div class="   mb-1">
+
+        </div>
+    </div>
+    <div class="p-10 ">
+        <div class="p-11 bg-slate-300  rounded-lg shadow-2xl m-20 ">
+            <div class="mb-1">
                 @if (Route::has('login'))
 
                     @auth
-                      <div class="shadow-2xl bg-cian rounded-lg m-2 m-3 flex justify-center items-center h-screen p-6">
-                        <a href="{{ url('/dashboard') }}"
-                            class="font-sease-inemibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                    
-                    </div>
-                            @else
-
-                        <div class="motion-safe:hover:scale-[1.01] transition-all duration-250 bg-cian rounded-lg m-2 shadow-2xl">
-                            <div class="flex justify-center items-center h-screen p-6  ">
-                                <a href="/login-google"
-                                    class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Sign
-                                    in with Google</a>
-                            </div>
+                        <div class="shadow-2xl bg-emerald-200 rounded-lg m-3 flex justify-center items-center p-4">
+                            <a href="{{ url('/dashboard') }}"
+                                class="font-sease-inemibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-300">Dashboard</a>
 
                         </div>
-            </div>
+                    @else
+                        <div class="motion-safe:hover:scale-[1.01] transition-all duration-250 bg-emerald-200 rounded-lg m-2 flex justify-center items-center p-4">
+                            <div class="mx-4">
+                                <a href="/login-google"
+                                    class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-300">Sign
+                                    in with Google   </a>
+                            </div>
+                            <div class="w-4 mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M3.064 7.51A9.996 9.996 0 0 1 12 2c2.695 0 4.959.99 6.69 2.605l-2.867 2.868C14.786 6.482 13.468 5.977 12 5.977c-2.605 0-4.81 1.76-5.595 4.123c-.2.6-.314 1.24-.314 1.9c0 .66.114 1.3.314 1.9c.786 2.364 2.99 4.123 5.595 4.123c1.345 0 2.49-.355 3.386-.955a4.6 4.6 0 0 0 1.996-3.018H12v-3.868h9.418c.118.654.182 1.336.182 2.045c0 3.046-1.09 5.61-2.982 7.35C16.964 21.105 14.7 22 12 22A9.996 9.996 0 0 1 2 12c0-1.614.386-3.14 1.064-4.49z"/></svg>
+                            </div>
+                        </div>
+                        
+                </div>
 
-                <div class="motion-safe:hover:scale-[1.01] transition-all duration-250 shadow-2xl bg-cian rounded-lg m-2 m-3 flex justify-center items-center h-screen p-6">
+                <div class="motion-safe:hover:scale-[1.01] transition-all duration-250 bg-emerald-200 rounded-lg m-2 flex justify-center items-center p-4">
 
-                    <a href="{{ route('login') }}"
-                        class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
+                    <div class="mx-4">
+                        <a href="{{ route('login') }}"
+                        class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-300">Log
                         in</a>
+                    </div>
+                    <div class="w-4 mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21v-2h7V5h-7V3h7q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm-2-4l-1.375-1.45l2.55-2.55H3v-2h8.175l-2.55-2.55L10 7l5 5Z"/></svg>
+                    </div>
+                    
                 </div>
 
                 @if (Route::has('register'))
-                    <div class="motion-safe:hover:scale-[1.01] transition-all duration-250 shadow-2xl bg-cian rounded-lg m-2 m-3 flex justify-center items-center h-screen p-6 mt-4 ">
-                        <a href="{{ route('register') }}"
-                            class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                    <div class="motion-safe:hover:scale-[1.01] transition-all duration-250 bg-emerald-200 rounded-lg m-2 m-3 flex justify-center items-center p-4">
+                        <div class="mx-4">
+                            <a href="{{ route('register') }}"
+                                class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-300">Register</a>
+                        </div>
+                        <div class="w-4 mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4a4 4 0 0 0-4-4a4 4 0 0 0-4 4a4 4 0 0 0 4 4Z"/></svg>
+                        </div>
 
                     </div>
                     
                 @endif
-                
-            @endauth
-        
 
-        @endif
+                @endauth
+            @endif
 
+        </div>
     </div>
-</div>
+
+    <footer class="relative bg-emerald-200 pt-8 pb-6">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-wrap text-left lg:text-left">
+            <div class="w-full lg:w-6/12 px-4">
+              <h4 class="text-3xl fonat-semibold text-blueGray-700">Estamos en contacto!</h4>
+              <h5 class="text-lg mt-0 mb-2 text-blueGray-600">
+                Buscanos en cualquiera de nuestras plataformas
+              </h5>
+              <div class="mt-6 lg:mb-0 mb-6">
+                <button class="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                  <i class="fab fa-twitter"></i></button><button class="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                  <i class="fab fa-facebook-square"></i></button><button class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                  <i class="fab fa-dribbble"></i></button><button class="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                  <i class="fab fa-github"></i>
+                </button>
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="flex flex-wrap items-top mb-3">
+                
+                <div class="w-full lg:w-4/12 px-4">
+                  <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Other Resources</span>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT License</a>
+                    </li>
+                    <li>
+                      <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
+                    </li>
+                    <li>
+                      <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
+                    </li>
+                    <li>
+                      <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="my-6 border-blueGray-300">
+          <div class="flex flex-wrap items-center md:justify-between justify-center">
+            <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+              <div class="text-sm text-blueGray-500 font-semibold py-1">
+                Copyright © <span id="get-current-year">2023</span><a href="https://www.creative-tim.com/product/notus-js" class="text-blueGray-500 hover:text-gray-800" target="_blank"> Esfot EPN by
+                <a href="https://www.creative-tim.com?ref=njs-profile" class="text-blueGray-500 hover:text-blueGray-800">Grupo 3</a>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
 </body>
 
 </html>
