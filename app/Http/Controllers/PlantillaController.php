@@ -16,13 +16,11 @@ class PlantillaController extends Controller
     
     public function index(Request $request)
     {
-        $texto = trim($request->get('texto'));                
-        
-        $plantilla = Plantilla::join("users","users.id", "=", "plantillas.jugador_id")
-                ->select('*')
-                ->where('users.name', 'LIKE', '%'.$texto.'%')
-                ->orWhere('users.email', 'LIKE', '%'.$texto.'%')
-                ->paginate(6);
+        $texto = trim($request->get('texto'));                                        
+        $plantilla = DB::table('plantillas')
+        ->join('users', 'plantillas.jugador_id', '=', 'users.id')
+        ->select('plantillas.*', 'users.name', 'users.email')
+        ->paginate(6);
             
         return view('plantillas.index', compact('plantilla', 'texto')); 
     }

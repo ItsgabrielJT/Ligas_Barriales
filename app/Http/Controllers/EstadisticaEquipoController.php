@@ -20,12 +20,13 @@ class EstadisticaEquipoController extends Controller
         $texto = trim($request->get('texto'));
         $texto_2 = trim($request->get('texto_2'));
 
-        $estadisticas = EstadisticaEquipo::join("calendarios","calendarios.id", "=", "estadistica_equipos.calendario_id")
-                ->select('*')                         
+        $estadisticas = EstadisticaEquipo::join("equipos","equipos.id", "=", "estadistica_equipos.equipo_id")
+                ->select('estadistica_equipos.*')    
+                ->where('equipos.nombre_equipo', 'LIKE', '%'.$texto.'%')
                 ->paginate(3);
 
         $estadisticasJd = EstadisticaJugador::join("users","users.id", "=", "estadistica_jugadors.jugador_id")
-                ->select('*')   
+                ->select('estadistica_jugadors.*')   
                 ->where('users.name', 'LIKE', '%'.$texto_2.'%')
                 ->paginate(3);
 
@@ -35,12 +36,10 @@ class EstadisticaEquipoController extends Controller
     
     public function create()
     {
-      $select = false;
-        $calenda = Calendario::with('local')
-            ->get();
-
-        $calendarios = $calenda->combine(Calendario::with('visitante')->get()
-            );
+        $select = false;
+        $calendarios = Calendario::join("equipos","equipos.id", "=", "calendarios.local_id")
+            ->select('calendarios.*')   
+            ->paginate(4);
 
         $estadisticaEq = new EstadisticaEquipo();
         $estadisticaJd = new EstadisticaJugador();
@@ -59,11 +58,9 @@ class EstadisticaEquipoController extends Controller
     
     public function select(Calendario $calendario)
     {        
-        $calenda = Calendario::with('local')
-            ->get();
-
-        $calendarios = $calenda->combine(Calendario::with('visitante')
-            ->get());
+        $calendarios = Calendario::join("equipos","equipos.id", "=", "calendarios.local_id")
+                ->select('calendarios.*')   
+                ->paginate(4);
         $select = True;
         $estadisticaEq = new EstadisticaEquipo();
         $estadisticaJd = new EstadisticaJugador();
@@ -80,7 +77,7 @@ class EstadisticaEquipoController extends Controller
    
     public function edit(EstadisticaEquipo $estadistica)
     {
-        return view('estadisticas.create', compact('estadistica'));        
+        return view('estadisticas.edit', compact('estadistica'));        
     }
 
     

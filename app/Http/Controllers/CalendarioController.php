@@ -18,7 +18,7 @@ class CalendarioController extends Controller
         $texto = trim($request->get('texto'));
 
         $calendarios = Calendario::join("equipos","equipos.id", "=", "calendarios.local_id")
-                ->select('*')   
+                ->select('calendarios.*')   
                 ->where('equipos.nombre_equipo', 'LIKE', '%'.$texto.'%')
                 ->orWhere('calendarios.fecha_partido', 'LIKE', '%'.$texto.'%')             
                 ->paginate(4);

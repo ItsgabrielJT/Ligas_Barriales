@@ -74,6 +74,8 @@
                         </tr>
                     </thead>
 
+
+
                     <tbody class="text-gray-600 text-sm font-light">
                         @if(count($estadisticas)<=0)
                                 <tr>
@@ -181,6 +183,7 @@
                         @endif
                     </tbody>                                
                 </table>
+                {{ $estadisticas->links() }}
             </div>
         </div>
     </div>
@@ -245,7 +248,7 @@
                     </thead>
 
                     <tbody class="text-gray-600 text-sm font-light">
-                        @if(count($estadisticas)<=0)
+                        @if(count($estadisticasJd)<=0)
                                 <tr>
                                     <td colspan="5" class="py-3 px-6 text-left whitespace-nowrap font-medium"> No hay Resultados </td>
                                 </tr>
@@ -343,6 +346,7 @@
                         @endif
                     </tbody>                                
                 </table>
+                {{ $estadisticasJd->links() }}
             </div>
         </div>
     </div>

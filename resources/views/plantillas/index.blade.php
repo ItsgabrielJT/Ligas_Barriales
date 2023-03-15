@@ -20,6 +20,7 @@
                 </div>
      @endif
 
+
     <form class="flex items-center" action="{{ route('plantilla.index') }}" method="get">
         @csrf
         @method('GET')

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Calendario;
 use App\Models\EstadisticaEquipo;
 use App\Models\EstadisticaJugador;
+use App\Models\Sancion;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -29,14 +30,15 @@ class EstadisticaJugadorController extends Controller
    
     public function edit(EstadisticaJugador $jugador)
     {
-        return view('estadisticas.create', compact('jugador'));        
+        $sanciones = Sancion::all();
+        return view('estadisticas.edit-players', compact('jugador', 'sanciones'));        
     }
 
     
-    public function update(Request $request, EstadisticaJugador $estadistica)
+    public function update(Request $request, EstadisticaJugador $jugador)
     {
-        $estadistica->fill($request->all());
-        $estadistica->save();    
+        $jugador->fill($request->all());
+        $jugador->save();    
         return redirect()->route('estadistica-equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Result from player Updated Sucessfully']);
     }
 
