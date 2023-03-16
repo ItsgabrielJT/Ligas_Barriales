@@ -17,6 +17,7 @@ class EquipoController extends Controller
         $texto = trim($request->get('texto'));
         $equipos = DB::table('equipos')
             ->join('users', 'equipos.user_id', '=', 'users.id')
+            ->where('users.name', 'LIKE', '%'.$texto.'%')
             ->select('*')
             ->paginate(4);
         return view('equipos.index', compact('equipos', 'texto')); 
