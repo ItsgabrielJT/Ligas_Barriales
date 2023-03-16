@@ -27,7 +27,5 @@ class Calendario extends Model
     public function torneo (){
         return $this->belongsTo(Torneo::class);
     }
-    public function visitante (){
-        return $this->belongsTo(Equipo::class);
-    }
+    
 }
