@@ -11,7 +11,8 @@ class Torneo extends Model
    
     protected $fillable = [
         'titulo',
-        'trofeo_image',
+        'url',
+        'public_id',
         'estado_torneo',
     ];    
 }

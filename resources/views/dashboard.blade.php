@@ -12,9 +12,9 @@
 
         @foreach ($calendario as $calen)
             @php
-                $image_trofeo = $calen->torneo->trofeo_image;
-                $image_local = $calen->local->image;
-                $image_visitante = $calen->visitante->image;
+                $image_trofeo = $calen->torneo->url;
+                $image_local = $calen->local->url;
+                $image_visitante = $calen->visitante->url;
             @endphp
             <div
                 class=" transition ease-in-out delay-200  hover:scale-110  duration-300 flex items-center justify-center py-10">
@@ -25,14 +25,14 @@
                     </div>
 
                     <div class="relative flex justify-center bottom-10">
-                        <img src="{{ asset("$image_trofeo") }}" class="w-20 h-20" />
+                        <img src="{{ $image_trofeo }}" class="w-20 h-20" />
                     </div>
 
                     <div class="justify-center relative py-2">
-                        <img src="{{ asset("$image_local") }}"
+                        <img src="{{ $image_local }}"
                             class="absolute left-40 rounded-full w-20 h-20 bottom-2" />
 
-                        <img src="{{ asset("$image_visitante") }}"
+                        <img src="{{ $image_visitante }}"
                             class="absolute right-40 rounded-full w-20 h-20 bottom-2" />
 
                     </div>

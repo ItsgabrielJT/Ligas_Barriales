@@ -77,7 +77,7 @@
                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="mr-2">
-                                        <img class="w-20    " src="{{ asset("$trn->trofeo_image") }}" />
+                                        <img class="w-20    " src="{{ $trn->url }}" />
                                     </div>
                                     <span class="font-medium">{{ str_pad($trn->id, 4, 0, STR_PAD_LEFT) }}</span>
                                 </div>

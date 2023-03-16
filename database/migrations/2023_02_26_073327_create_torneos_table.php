@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('torneos', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->string('trofeo_image')->nullable();
+            $table->string('public_id');
+            $table->string('url');
             $table->string('estado_torneo');                    
             $table->timestamps();
         });

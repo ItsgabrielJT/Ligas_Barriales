@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TorneoStoreRequest;
 use App\Models\Calendario;
 use App\Models\Torneo;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,8 +33,12 @@ class TorneoController extends Controller
     {
         $data = $request->all();
         if($request->has('trofeo_image')) {
-            $img_path = $request->file('trofeo_image')->store('medias');
-            $data['trofeo_image'] = $img_path;
+            $img_path = $request->file('trofeo_image');
+            $obj = Cloudinary::upload($img_path->getRealPath(), ['folder' => 'torneos']);
+            $public_id = $obj->getPublicId();
+            $url = $obj->getSecurePath();
+            $data['url']=$url;
+            $data['public_id']=$public_id;
         }
         Torneo::create($data);
         return redirect()->route('calendario.create')

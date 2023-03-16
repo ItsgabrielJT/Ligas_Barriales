@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EquipoStoreRequest;
 use App\Models\Equipo;
 use App\Models\User;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,8 +35,12 @@ class EquipoController extends Controller
     {
         $data = $request->all();
         if($request->has('image')) {
-            $img_path = $request->file('image')->store('medias');
-            $data['image'] = $img_path;
+            $img_path = $request->file('image');
+            $obj = Cloudinary::upload($img_path->getRealPath(), ['folder' => 'equipos']);
+            $public_id = $obj->getPublicId();
+            $url = $obj->getSecurePath();
+            $data['url']=$url;
+            $data['public_id']=$public_id;
         }
         Equipo::create($data);
         return redirect()->route('equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Equipo Registred Sucessfully']);
