@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nombre_equipo');
             $table->string('descripcion');
-            $table->string('image')->nullable();
+            $table->string('public_id');
+            $table->string('url');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });

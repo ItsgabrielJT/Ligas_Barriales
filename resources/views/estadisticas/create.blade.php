@@ -103,7 +103,7 @@
                         @endif
 
                         @php
-                            $image = $calendario->local->image;
+                            $image = $calendario->local->url;
                         @endphp
 
                         @csrf
@@ -112,7 +112,7 @@
                         <div class="shadow sm:rounded-md sm:overflow-hidden">
                             <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                                 <div class="mr-2">
-                                    <img class="w-40" src="{{ asset("$image") }}" />
+                                    <img class="w-40" src="{{ $image }}" />
                                     <span class=" text-sm text-purple-500" role="alert">
                                         <strong>{{ $calendario->local->nombre_equipo }}</strong>
                                     </span>
@@ -248,7 +248,7 @@
                             {{ method_field('PUT') }}
                         @endif
                         @php
-                            $image = $calendario->visitante->image;
+                            $image = $calendario->visitante->url;
                         @endphp
 
                         @csrf
@@ -257,7 +257,7 @@
                         <div class="shadow sm:rounded-md sm:overflow-hidden">
                             <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                                 <div class="mr-2">
-                                    <img class="w-40" src="{{ asset("$image") }}" />
+                                    <img class="w-40" src="{{ $image }}" />
                                     <span class=" text-sm text-purple-500" role="alert">
                                         <strong>{{ $calendario->visitante->nombre_equipo }}</strong>
                                     </span>

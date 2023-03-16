@@ -77,7 +77,7 @@
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="mr-2">
-                                            <img class="w-20    " src="{{ asset("$byr->image") }}" />
+                                            <img class="w-20    " src="{{ $byr->url }}" />
                                         </div>
                                         <span class="font-medium">{{ str_pad($byr->id, 4, 0, STR_PAD_LEFT) }}</span>
                                     </div>

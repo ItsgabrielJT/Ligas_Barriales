@@ -84,18 +84,18 @@
                         @else
                         @foreach ($estadisticas as $byr)
                             @php
-                                $imageL = $byr->calendario->local->image;               
-                                $imageV = $byr->calendario->visitante->image;                 
+                                $imageL = $byr->calendario->local->url;               
+                                $imageV = $byr->calendario->visitante->url;                 
                             @endphp
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="mr-2 m-2">
-                                            <img class="w-10" src="{{ asset("$imageL") }}" />
+                                            <img class="w-10" src="{{ $imageL }}" />
                                         </div>
                                         <span class="font-medium"> VS </span>
                                         <div class="mr-2 m-3">
-                                            <img class="w-10" src="{{ asset("$imageV") }}" />
+                                            <img class="w-10" src="{{ $imageV }}" />
                                         </div>
                                     </div>
                                 </td>                                
@@ -255,18 +255,18 @@
                         @else
                         @foreach ($estadisticasJd as $byr)
                             @php
-                                $imageL = $byr->calendario->local->image;               
-                                $imageV = $byr->calendario->visitante->image;                 
+                                $imageL = $byr->calendario->local->url;               
+                                $imageV = $byr->calendario->visitante->url;                 
                             @endphp
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="mr-2 m-2">
-                                            <img class="w-10" src="{{ asset("$imageL") }}" />
+                                            <img class="w-10" src="{{ $imageL }}" />
                                         </div>
                                         <span class="font-medium"> VS </span>
                                         <div class="mr-2 m-3">
-                                            <img class="w-10" src="{{ asset("$imageV") }}" />
+                                            <img class="w-10" src="{{ $imageV }}" />
                                         </div>
                                     </div>
                                 </td>   

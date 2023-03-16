@@ -75,18 +75,18 @@
                             @else
                         @foreach ($calendarios as $byr)
                             @php    
-                                $imageL = $byr->local->image;               
-                                $imageV = $byr->visitante->image;                 
+                                $imageL = $byr->local->url;               
+                                $imageV = $byr->visitante->url;                 
                             @endphp
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="mr-2 m-2">
-                                            <img class="w-10" src="{{ asset("$imageL") }}" />
+                                            <img class="w-10" src="{{ $imageL }}" />
                                         </div>
                                         <span class="font-medium"> VS </span>
                                         <div class="mr-2 m-3">
-                                            <img class="w-10" src="{{ asset("$imageV") }}" />
+                                            <img class="w-10" src="{{ $imageV }}" />
                                         </div>
                                     </div>
                                 </td>

@@ -10,8 +10,9 @@ class Equipo extends Model
     protected $fillable = [
         'nombre_equipo',
         'descripcion',
-        'image',
-        'user_id',
+        'url',
+        'public_id',
+        'user_id'
     ];
 
     public function user () {

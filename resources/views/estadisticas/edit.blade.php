@@ -26,7 +26,7 @@
                         @endif
 
                         @php
-                            $image = $estadistica->equipo->image;
+                            $image = $estadistica->equipo->url;
                         @endphp
 
                         @csrf
@@ -35,7 +35,7 @@
                         <div class="shadow sm:rounded-md sm:overflow-hidden">
                             <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                                 <div class="mr-2">
-                                    <img class="w-40" src="{{ asset("$image") }}" />
+                                    <img class="w-40" src="{{ $image }}" />
                                     <span class=" text-sm text-purple-500" role="alert">
                                         <strong>{{ $estadistica->equipo->nombre_equipo }}</strong>
                                     </span>
