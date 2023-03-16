@@ -58,6 +58,20 @@ class TorneoController extends Controller
     public function update(TorneoStoreRequest $request, Torneo $torneo)
     {
         $torneo->fill($request->validated());
+
+        $url = $torneo->url;
+        $public_id = $torneo->public_id;
+
+        if($request->has('trofeo_image')) {
+            Cloudinary::destroy($public_id);
+            $img_path = $request->file('trofeo_image');
+            $obj = Cloudinary::upload($img_path->getRealPath(), ['folder' => 'torneos']);
+            $public_id = $obj->getPublicId();
+            $url = $obj->getSecurePath();
+            $torneo['url']=$url;
+            $torneo['public_id']=$public_id;
+        }
+
         $torneo->save();
         return redirect()->route('calendario.create', ['torneo'=>$torneo])
             ->with(['status'=>'Success', 'color' => 'green', 'message'=>'Torneo update Sucessfully']);

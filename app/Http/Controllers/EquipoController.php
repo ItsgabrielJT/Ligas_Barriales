@@ -62,6 +62,19 @@ class EquipoController extends Controller
     public function update(EquipoStoreRequest $request, Equipo $equipo)
     {
         $equipo->fill($request->validated());
+        $url = $equipo->url;
+        $public_id = $equipo->public_id;
+
+        if($request->has('image')) {
+            Cloudinary::destroy($public_id);
+            $img_path = $request->file('image');
+            $obj = Cloudinary::upload($img_path->getRealPath(), ['folder' => 'equipos']);
+            $public_id = $obj->getPublicId();
+            $url = $obj->getSecurePath();
+            $equipo['url']=$url;
+            $equipo['public_id']=$public_id;
+        }
+        
         $equipo->save();    
         return redirect()->route('equipo.index')->with(['status'=>'Success', 'color' => 'green', 'message'=>'Equipo Updated Sucessfully']);
     }
