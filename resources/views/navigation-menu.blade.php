@@ -15,15 +15,21 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @can('equipos.index')
                     <x-nav-link href="{{ route('equipo.index') }}" :active="request()->routeIs('equipo.*')">
                         {{ __('Equipo') }}
                     </x-nav-link>
+                    @endcan
+                    @can('plantilla.index')
                     <x-nav-link href="{{ route('plantilla.index') }}" :active="request()->routeIs('plantilla.*')">
                         {{ __('Plantilla') }}
                     </x-nav-link>
+                    @endcan
+                    @can('torneo.index')
                     <x-nav-link href="{{ route('torneo.index') }}" :active="request()->routeIs('torneo.*')">
                         {{ __('Torneos') }}
                     </x-nav-link>
+                    @endcan
                     <x-nav-link href="{{ route('estadistica-equipo.index') }}" :active="request()->routeIs('estadistica-equipo.*')">
                         {{ __('Estadisticas') }}
                     </x-nav-link>

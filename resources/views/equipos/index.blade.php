@@ -91,7 +91,7 @@
                                 <td class="py-3 px-6 text-left">
                                     <div class="flex items-center">
 
-                                        <span>{{ Auth::user()->name }}</span>
+                                        <span>{{ $byr->name }}</span>
                                     </div>
                                 </td>
                                 

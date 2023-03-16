@@ -3,10 +3,12 @@
 @section('title', 'Estadisticas')
 
 @section('button-add')
+    @can('estadistica-equipo.create')
     <a href="{{ route('estadistica-equipo.create') }}"
         class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mb-4">
         {{ __('Registrar Resultados') }}
-    </a>
+    </a>        
+    @endcan
 @endsection
 
 @section('search')
@@ -145,18 +147,21 @@
                                 <td class="py-3 px-6 text-center">
                                     <div class="flex item-center justify-center">
                                         
+                                        @can('estadistica-equipo.update')
                                         <div
-                                            class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                            <a
-                                                href="{{ route('estadistica-equipo.edit', ['estadistica' => $byr->id]) }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                </svg>
-                                            </a>
-                                        </div>
+                                        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                        <a
+                                            href="{{ route('estadistica-equipo.edit', ['estadistica' => $byr->id]) }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                        @endcan
+                                        @can('estadistica-equipo.destroy')
                                         <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                             <form method="POST" action="{{ route('estadistica-equipo.destroy', ['estadistica' => $byr->id]) }}"
                                                 class="inline">
@@ -176,6 +181,7 @@
                                                 </a>
                                             </form>
                                         </div>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
@@ -308,18 +314,21 @@
                                 <td class="py-3 px-6 text-center">
                                     <div class="flex item-center justify-center">
                                         
+                                        @can('estadistica-jugador.update')
                                         <div
-                                            class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                            <a
-                                                href="{{ route('estadistica-jugador.edit', ['jugador' => $byr->id]) }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                </svg>
-                                            </a>
-                                        </div>
+                                        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                        <a
+                                            href="{{ route('estadistica-jugador.edit', ['jugador' => $byr->id]) }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                        @endcan
+                                        @can('estadistica-jugador.destroy')
                                         <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                             <form method="POST" action="{{ route('estadistica-jugador.destroy', ['jugador' => $byr->id]) }}"
                                                 class="inline">
@@ -339,6 +348,7 @@
                                                 </a>
                                             </form>
                                         </div>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

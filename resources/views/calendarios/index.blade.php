@@ -3,10 +3,12 @@
 @section('title', 'Calendarios')
 
 @section('button-add')
+    @can('calendario.create')
     <a href="{{ route('calendario.create', ['torneo'=>$torneo]) }}"
         class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mb-4">
         {{ __('Crear mi calendario') }}
     </a>
+    @endcan
 @endsection
 
 @section('search')
@@ -63,7 +65,9 @@
                             <th class="py-3 px-6 text-left"> Fecha </th>
                             <th class="py-3 px-6 text-left">Equipo Local</th>
                             <th class="py-3 px-6 text-left">Equipo Visitante</th>
+                            @can('calendario.update')
                             <th class="py-3 px-6 text-center">Actions</th>
+                            @endcan
                         </tr>
                     </thead>
 
@@ -106,6 +110,7 @@
                                     </div>
                                 </td>
                                                                 
+                                @can('calendario.destroy')
                                 <td class="py-3 px-6 text-center">
                                     <div class="flex item-center justify-center">
                                         
@@ -142,6 +147,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                @endcan
                             </tr>
                         @endforeach
                         @endif

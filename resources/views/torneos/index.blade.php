@@ -3,10 +3,12 @@
 @section('title', 'Torneos')
 
 @section('button-add')
+    @can('torneo.create')
     <a href="{{ route('torneo.create') }}"
-        class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mb-4">
-        {{ __('Agregar Torneo') }}
-    </a>
+    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mb-4">
+    {{ __('Agregar Torneo') }}
+</a>
+    @endcan
 @endsection
 
 @section('search')
@@ -97,50 +99,56 @@
 
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center">
+                                    @can('calendario.index')
                                     <div
-                                        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                        <a
-                                            href={{ route('calendario.index', ['torneo'=> $trn->id]) }}>                                            
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M17 22v-3h-3v-2h3v-3h2v3h3v2h-3v3ZM5 20q-.825 0-1.413-.587Q3 18.825 3 18V6q0-.825.587-1.412Q4.175 4 5 4h1V2h2v2h6V2h2v2h1q.825 0 1.413.588Q19 5.175 19 6v6.1q-.5-.075-1-.075t-1 .075V10H5v8h7q0 .5.075 1t.275 1ZM5 8h12V6H5Zm0 0V6v2Z"/></svg>
-                                        </a>
-                                    </div>
+                                    class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                    <a
+                                        href={{ route('calendario.index', ['torneo'=> $trn->id]) }}>                                            
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M17 22v-3h-3v-2h3v-3h2v3h3v2h-3v3ZM5 20q-.825 0-1.413-.587Q3 18.825 3 18V6q0-.825.587-1.412Q4.175 4 5 4h1V2h2v2h6V2h2v2h1q.825 0 1.413.588Q19 5.175 19 6v6.1q-.5-.075-1-.075t-1 .075V10H5v8h7q0 .5.075 1t.275 1ZM5 8h12V6H5Zm0 0V6v2Z"/></svg>
+                                    </a>
+                                </div>
+                                    @endcan
 
 
                                     {{-- Edit --}}
+                                    @can('torneo.update')
                                     <div
-                                        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                    class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
 
-                                        <a
-                                            href={{ route('torneo.edit', ['torneo'=> $trn->id]) }}>
+                                    <a
+                                        href={{ route('torneo.edit', ['torneo'=> $trn->id]) }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                    @endcan
+
+                                    @can('torneo.destroy')
+                                    <div
+                                    class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                    <form method="POST"
+                                        action="{{ route('torneo.destroy', ['torneo'=> $trn->id]) }}">
+                                        @csrf
+                                        {{  method_field("DELETE") }}
+
+                                        <a href="{{ route('torneo.destroy', ['torneo'=> $trn->id]) }}"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     stroke-width="2"
-                                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>
                                         </a>
-                                    </div>
+                                    </form>
 
-                                    <div
-                                        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                        <form method="POST"
-                                            action="{{ route('torneo.destroy', ['torneo'=> $trn->id]) }}">
-                                            @csrf
-                                            {{  method_field("DELETE") }}
-
-                                            <a href="{{ route('torneo.destroy', ['torneo'=> $trn->id]) }}"
-                                                onclick="event.preventDefault();
-                                                            this.closest('form').submit();">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </a>
-                                        </form>
-
-                                    </div>
+                                </div>
+                                    @endcan
                                 </div>
                             </td>
                         </tr>
